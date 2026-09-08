@@ -1,0 +1,23 @@
+# ios/Frameworks/Stay22SDK.xcframework is tracked deliberately — CocoaPods
+# vendors it straight out of the package. Nothing here may match it.
+# Android has no counterpart: it resolves com.stay22:sdk from Stay22's Maven
+# repository, because Flutter's Gradle tooling makes a bundled repo unreachable.
+
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
+# A lock file in a published library is misleading: consumers resolve against
+# their own constraints and pub ignores it.
+pubspec.lock
+example/pubspec.lock
+
+example/ios/Podfile.lock
+example/ios/Pods/
+example/ios/.symlinks/
+example/ios/Flutter/Generated.xcconfig
+example/ios/Flutter/flutter_export_environment.sh
+example/android/local.properties
+example/android/.gradle/
+**/*.xcuserdata*

@@ -1,0 +1,30 @@
+name: stay22_flutter
+description: >-
+  Stay22 SDK for Flutter. Turns explicit travel intent into a single, well-timed
+  local notification that opens a Stay22 accommodation booking page.
+version: 1.2.0
+homepage: https://www.stay22.com
+repository: https://github.com/Stay22/stay22-flutter-sdk
+issue_tracker: https://github.com/Stay22/stay22-flutter-sdk/issues
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.stay22.flutter
+        pluginClass: Stay22FlutterPlugin
+      ios:
+        pluginClass: Stay22FlutterPlugin

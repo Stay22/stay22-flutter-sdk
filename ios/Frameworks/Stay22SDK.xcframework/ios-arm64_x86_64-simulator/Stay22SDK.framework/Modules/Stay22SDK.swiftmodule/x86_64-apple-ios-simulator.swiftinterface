@@ -1,0 +1,199 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)
+// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name Stay22SDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.4
+import Foundation
+import Swift
+import UIKit
+import UserNotifications
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+public struct NotificationConfig {
+  public let title: Swift.String
+  public let subtitle: Swift.String?
+  public let message: Swift.String
+  public let categoryId: Swift.String
+  public let threadId: Swift.String
+  public let badge: Swift.Int?
+  public let launchImageName: Swift.String?
+  public let targetContentIdentifier: Swift.String?
+  public let interruptionLevel: Stay22SDK.NotificationInterruptionLevel?
+  public let relevanceScore: Swift.Double?
+  public let attachments: [Stay22SDK.NotificationAttachment]
+  public let actions: [Stay22SDK.NotificationAction]
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(title: Swift.String = "Hotels in {destination}", subtitle: Swift.String? = nil, message: Swift.String = "Tap to find the best deals nearby", categoryId: Swift.String = "stay22_destinations", threadId: Swift.String = "stay22", badge: Swift.Int? = nil, launchImageName: Swift.String? = nil, targetContentIdentifier: Swift.String? = nil, interruptionLevel: Stay22SDK.NotificationInterruptionLevel? = nil, relevanceScore: Swift.Double? = nil, attachments: [Stay22SDK.NotificationAttachment] = [], actions: [Stay22SDK.NotificationAction] = [])
+  #endif
+}
+@frozen public enum NotificationInterruptionLevel : Swift.String {
+  case passive
+  case active
+  case timeSensitive
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct NotificationAttachment {
+  public let identifier: Swift.String
+  public let fileURL: Foundation.URL
+  public init(identifier: Swift.String = "stay22_attachment", fileURL: Foundation.URL)
+}
+public struct NotificationAction {
+  public let identifier: Swift.String
+  public let title: Swift.String
+  public let foreground: Swift.Bool
+  public let authenticationRequired: Swift.Bool
+  public let destructive: Swift.Bool
+  public init(identifier: Swift.String, title: Swift.String, foreground: Swift.Bool = true, authenticationRequired: Swift.Bool = false, destructive: Swift.Bool = false)
+}
+@_hasMissingDesignatedInitializers final public class Stay22 {
+  public static var medium: Swift.String {
+    get
+    set
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static var campaignId: Swift.String? {
+    get
+    set
+  }
+  #endif
+  public static var isEnabled: Swift.Bool {
+    get
+    set
+  }
+  public static var isInitialized: Swift.Bool {
+    get
+  }
+  public static var notificationConfig: Stay22SDK.NotificationConfig {
+    get
+    set
+  }
+  public static var advanced: Stay22SDK.Stay22.Advanced {
+    get
+  }
+  public static var testing: Stay22SDK.Stay22.Testing {
+    get
+  }
+  public static var diagnostics: Stay22SDK.Stay22.Diagnostics {
+    get
+  }
+  public static func initialize(aid: Swift.String)
+  public static func hasNotificationPermission() async -> Swift.Bool
+  @discardableResult
+  public static func requestNotificationPermission() async -> Swift.Bool
+  public static func setTravelContext(_ context: Stay22SDK.TravelContext)
+  public static func clearTravelContext()
+  @discardableResult
+  public static func handleNotificationResponse(_ response: UserNotifications.UNNotificationResponse) -> Swift.Bool
+  @discardableResult
+  public static func handleWillPresentNotification(_ notification: UserNotifications.UNNotification) -> Swift.Bool
+  public static var ownsNotificationDelegate: Swift.Bool {
+    get
+  }
+  @_hasMissingDesignatedInitializers final public class Diagnostics {
+    final public func run() async -> Stay22SDK.Stay22Diagnostics
+    @discardableResult
+    final public func logReport() async -> Stay22SDK.Stay22Diagnostics
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers final public class Testing {
+    final public var force: Swift.Bool {
+      get
+      set
+    }
+    final public var showLogs: Swift.Bool {
+      get
+      set
+    }
+    final public var baseURL: Swift.String {
+      get
+      set
+    }
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers final public class Advanced {
+    #if compiler(>=5.3) && $NonescapableTypes
+    final public func setEventListener(_ listener: (any Stay22SDK.Stay22EventListener)?)
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    final public func setEventHandler(_ handler: ((Stay22SDK.Stay22Event) -> Swift.Void)?)
+    #endif
+    final public func clearTravelContext()
+    final public func scheduleNotification(force: Swift.Bool = false)
+    @objc deinit
+  }
+  @objc deinit
+}
+public struct Stay22Diagnostics {
+  public enum Status : Swift.String {
+    case pass
+    case warn
+    case fail
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init?(rawValue: Swift.String)
+    #endif
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public struct Check {
+    public let name: Swift.String
+    public let status: Stay22SDK.Stay22Diagnostics.Status
+    public let detail: Swift.String?
+  }
+  public let sdkVersion: Swift.String
+  public let checks: [Stay22SDK.Stay22Diagnostics.Check]
+  public var failures: [Stay22SDK.Stay22Diagnostics.Check] {
+    get
+  }
+  public var warnings: [Stay22SDK.Stay22Diagnostics.Check] {
+    get
+  }
+  public var isHealthy: Swift.Bool {
+    get
+  }
+  public func describe() -> Swift.String
+}
+public enum Stay22Event {
+  case locationUpdated(destination: Swift.String)
+  case notificationScheduled(destination: Swift.String, delay: Foundation.TimeInterval)
+  case notificationShown(destination: Swift.String)
+  case notificationClicked(destination: Swift.String, url: Swift.String)
+  case notificationBlocked(reason: Swift.String)
+  case notificationSkipped(reason: Swift.String)
+  case notificationCancelled(reason: Swift.String)
+  case enabledChanged(isEnabled: Swift.Bool)
+  case travelContextCleared
+}
+public protocol Stay22EventListener : AnyObject {
+  func onEvent(_ event: Stay22SDK.Stay22Event)
+}
+public struct TravelContext {
+  public let address: Swift.String?
+  public let latitude: Swift.Double?
+  public let longitude: Swift.Double?
+  public let checkinDate: Swift.String?
+  public let checkoutDate: Swift.String?
+  public let hotelName: Swift.String?
+  public let adults: Swift.Int?
+  public let children: Swift.Int?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(address: Swift.String? = nil, latitude: Swift.Double? = nil, longitude: Swift.Double? = nil, checkinDate: Swift.String? = nil, checkoutDate: Swift.String? = nil, hotelName: Swift.String? = nil, adults: Swift.Int? = nil, children: Swift.Int? = nil)
+  #endif
+}
+extension Stay22SDK.NotificationInterruptionLevel : Swift.Equatable {}
+extension Stay22SDK.NotificationInterruptionLevel : Swift.Hashable {}
+extension Stay22SDK.NotificationInterruptionLevel : Swift.RawRepresentable {}
+extension Stay22SDK.NotificationInterruptionLevel : Swift.Sendable {}
+extension Stay22SDK.NotificationInterruptionLevel : Swift.BitwiseCopyable {}
+extension Stay22SDK.Stay22Diagnostics.Status : Swift.Equatable {}
+extension Stay22SDK.Stay22Diagnostics.Status : Swift.Hashable {}
+extension Stay22SDK.Stay22Diagnostics.Status : Swift.RawRepresentable {}

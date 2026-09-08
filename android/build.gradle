@@ -1,0 +1,63 @@
+// Flutter plugins build as a Gradle subproject of the host app, so this file
+// inherits the app's toolchain rather than pinning its own. Pinning AGP and
+// Kotlin here (as the previous version did) forces a version on every consumer
+// and breaks any app on a different one.
+group 'com.stay22.flutter'
+version '1.1.0'
+
+buildscript {
+    ext.safeExtGet = { prop, fallback ->
+        rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+// Flutter creates a `flutter` extension on plugin subprojects so they can use
+// the SDK's vended compile/target versions. It is absent on older Flutter, so
+// fall back rather than break those hosts.
+def flutterExt = project.extensions.findByName('flutter')
+def resolvedCompileSdk = (flutterExt != null && flutterExt.hasProperty('compileSdkVersion'))
+        ? flutterExt.compileSdkVersion
+        : safeExtGet('compileSdkVersion', 34)
+
+// Rewritten by scripts/sync-binaries.sh and checked by flutter-test.yml.
+def stay22SdkVersion = "1.2.0"
+
+android {
+    namespace "com.stay22.flutter"
+    // Tracks the host app, so AGP's AAR metadata check passes as the host moves.
+    compileSdk resolvedCompileSdk
+
+    defaultConfig {
+        // Hard-coded on purpose, unlike compileSdk above. 26 is the Stay22 SDK's
+        // own floor, so inheriting a lower value from the host would turn a clear
+        // "raise your minSdk" message into a confusing manifest merge failure.
+        minSdk 26
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+// No `repositories {}` block here, deliberately. Flutter's own Gradle tooling
+// sets RepositoriesMode.FAIL_ON_PROJECT_REPOS
+// (flutter_tools/gradle/settings.gradle.kts), so any repository a plugin
+// declares for itself is ignored — the vendored SDK was unresolvable when this
+// file asked for it as the Maven coordinate `com.stay22:sdk`.
+//
+// A file dependency needs no repository, so it resolves in every host app. The
+// trade-off is that a bare .aar carries no POM, so the SDK's own dependencies
+// are re-declared below. They mirror the generated
+// libs/com/stay22/sdk/<version>/sdk-<version>.pom; sync-binaries.sh fails if the
+// two drift apart.
+dependencies {
+    implementation "com.stay22:sdk:${stay22SdkVersion}"
+}

@@ -1,0 +1,4 @@
+framework module Stay22SDK {
+  header "Stay22SDK-Swift.h"
+  requires objc
+}

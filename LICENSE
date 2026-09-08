@@ -1,0 +1,111 @@
+Stay22 Flutter SDK License Agreement
+
+Copyright (c) 2026 Stay22 Technologies Inc. All Rights Reserved.
+
+This Stay22 Flutter SDK License Agreement ("Agreement") is a legal agreement
+between you, or the entity you represent ("Licensee", "you"), and Stay22
+Technologies Inc. ("Stay22", "we", "us") governing your use of the SDK (as
+defined below). By downloading, installing, accessing, or using the SDK, you
+agree to be bound by this Agreement. If you do not agree, do not download,
+install, access, or use the SDK.
+
+1. Definitions
+
+   1.1 "SDK" means the Stay22 Flutter software development kit distributed in
+   this repository, including the Dart package, its platform bridges, the
+   prebuilt "Stay22SDK" binary framework (Stay22SDK.xcframework) it vendors, the
+   prebuilt Stay22 Android library (`.aar`) it resolves, any accompanying
+   libraries, sample code, documentation, updates, and related materials made
+   available by Stay22.
+
+   1.2 "Stay22 Services" means the hosted services, APIs, and platform operated
+   by Stay22 with which the SDK is designed to interoperate.
+
+2. Ownership
+
+   The SDK is proprietary to and is the confidential information of Stay22 and
+   its licensors. The SDK is licensed, not sold. All right, title, and interest
+   in and to the SDK, including all intellectual property rights therein, remain
+   the exclusive property of Stay22 and its licensors. Except for the limited
+   license expressly granted in Section 3, no rights are granted to you, whether
+   by implication, estoppel, or otherwise.
+
+3. License Grant
+
+   Subject to your continuous compliance with this Agreement and any separate
+   written agreement between you and Stay22, Stay22 grants you a limited,
+   non-exclusive, non-transferable, non-sublicensable, revocable license to
+   install and use the SDK solely to develop, test, and operate applications
+   that integrate with and access the Stay22 Services. This license does not
+   permit any other use.
+
+4. Restrictions
+
+   You shall not, and shall not permit any third party to:
+
+   (a) copy, distribute, sublicense, rent, lease, lend, sell, or otherwise make
+       the SDK available to any third party, except as embedded in compiled form
+       within your application as necessary to use the Stay22 Services;
+   (b) reverse engineer, decompile, disassemble, or otherwise attempt to derive
+       the source code, structure, or underlying ideas of the SDK, except to the
+       limited extent such restriction is prohibited by applicable law;
+   (c) modify, adapt, translate, or create derivative works of the SDK;
+   (d) remove, alter, or obscure any proprietary notices, labels, or marks on or
+       in the SDK;
+   (e) use the SDK to build a competing product or service, or for any purpose
+       other than the purpose expressly authorized in Section 3; or
+   (f) use the SDK in violation of any applicable law or regulation.
+
+5. Confidentiality
+
+   The SDK and its non-public components, including any non-public documentation
+   and interfaces, are the confidential information of Stay22. You shall protect
+   the SDK from unauthorized use, access, or disclosure using at least the same
+   degree of care you use to protect your own confidential information, and in no
+   event less than a reasonable degree of care.
+
+6. Term and Termination
+
+   This Agreement is effective until terminated. It terminates automatically upon
+   your breach of any of its terms, and may also terminate as provided in any
+   separate written agreement between you and Stay22. Upon termination, the
+   license granted in Section 3 ends immediately and you must cease all use of
+   the SDK and delete or remove all copies in your possession or control.
+   Sections 2, 4, 5, 7, 8, and 9 survive termination.
+
+7. Disclaimer of Warranty
+
+   THE SDK IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY KIND.
+   TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, STAY22 AND ITS LICENSORS
+   DISCLAIM ALL WARRANTIES, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE,
+   INCLUDING WITHOUT LIMITATION ANY IMPLIED WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+
+8. Limitation of Liability
+
+   TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL STAY22 OR
+   ITS LICENSORS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL,
+   EXEMPLARY, OR PUNITIVE DAMAGES, OR FOR ANY LOSS OF PROFITS, REVENUE, DATA, OR
+   GOODWILL, ARISING OUT OF OR RELATED TO THIS AGREEMENT OR THE SDK, WHETHER IN
+   CONTRACT, TORT, OR OTHERWISE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+   DAMAGES. STAY22'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS
+   AGREEMENT SHALL NOT EXCEED ONE HUNDRED CANADIAN DOLLARS (CAD $100).
+
+9. Governing Law
+
+   This Agreement is governed by and construed in accordance with the laws of the
+   Province of Quebec and the federal laws of Canada applicable therein, without
+   regard to its conflict-of-laws principles. The courts located in Montreal,
+   Quebec, Canada shall have exclusive jurisdiction over any dispute arising out
+   of or relating to this Agreement.
+
+10. Entire Agreement; Precedence
+
+   If you have entered into a separate written agreement with Stay22 governing
+   the SDK or the Stay22 Services, that agreement controls in the event of any
+   conflict with this Agreement. Otherwise, this Agreement constitutes the entire
+   agreement between you and Stay22 regarding the SDK and supersedes all prior or
+   contemporaneous understandings on that subject.
+
+For licensing inquiries, contact your Stay22 representative or visit
+https://www.stay22.com.
