@@ -3,7 +3,7 @@
 // Kotlin here (as the previous version did) forces a version on every consumer
 // and breaks any app on a different one.
 group 'com.stay22.flutter'
-version '1.1.0'
+version '1.2.0'
 
 buildscript {
     ext.safeExtGet = { prop, fallback ->
@@ -47,17 +47,17 @@ android {
     }
 }
 
-// No `repositories {}` block here, deliberately. Flutter's own Gradle tooling
-// sets RepositoriesMode.FAIL_ON_PROJECT_REPOS
-// (flutter_tools/gradle/settings.gradle.kts), so any repository a plugin
-// declares for itself is ignored — the vendored SDK was unresolvable when this
-// file asked for it as the Maven coordinate `com.stay22:sdk`.
+// No `repositories {}` block here, deliberately, and the host app has to declare
+// Stay22's Maven repository itself — see this package's README. Flutter's own Gradle
+// tooling sets RepositoriesMode.FAIL_ON_PROJECT_REPOS
+// (flutter_tools/gradle/settings.gradle.kts), so any repository a plugin declares
+// for itself is ignored. That is also why the SDK is not vendored the way the iOS
+// framework is: a bundled Maven repo would be unreachable, and AGP rejects a local
+// .aar file dependency in a library module outright.
 //
-// A file dependency needs no repository, so it resolves in every host app. The
-// trade-off is that a bare .aar carries no POM, so the SDK's own dependencies
-// are re-declared below. They mirror the generated
-// libs/com/stay22/sdk/<version>/sdk-<version>.pom; sync-binaries.sh fails if the
-// two drift apart.
+// Resolving the published coordinate means the POM comes with it, so transitive
+// dependencies are Gradle's problem rather than something this file has to
+// restate.
 dependencies {
     implementation "com.stay22:sdk:${stay22SdkVersion}"
 }

@@ -488,8 +488,8 @@ class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
          * Everything else here silently discarded the call and reported success:
          * `setTravelContext`/`clearTravelContext`/`scheduleNotification` returned null,
          * and `hasNotificationPermission` returned false indistinguishable from "denied".
-         * `requestNotificationPermission` already raised `not_initialized` by hand, one
-         * idiom ahead of the rest — folded into this shared list instead.
+         * `requestNotificationPermission` raises the same `not_initialized` error, so
+         * every call in the set now fails the one way.
          */
         val REQUIRES_INITIALIZATION = setOf(
             "hasNotificationPermission",
