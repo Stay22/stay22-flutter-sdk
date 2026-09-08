@@ -3,21 +3,6 @@
 All notable changes to the Stay22 Flutter SDK are documented here.
 This project adheres to [Semantic Versioning](https://semver.org).
 
-## How to write an entry
-
-These sections are published verbatim as the release notes an integrator reads on
-GitHub — `scripts/extract-changelog.sh` copies them out at release time — so write for
-someone upgrading, not for us.
-
-Unlike iOS and Android, Dart has no committed public-API snapshot to diff, so
-`scripts/check-changelog.sh` enforces a coarser rule here: any change under `flutter/lib`
-needs a non-empty `[Unreleased]` section on the same pull request. There is no
-`### Breaking changes` heading requirement or major-version check — judge that yourself,
-the way the native platforms' own conventions describe.
-
-Other sections follow Keep a Changelog: `Added`, `Changed`, `Deprecated`, `Removed`,
-`Fixed`, `Security`, `Documentation`.
-
 ## [Unreleased]
 
 ## [1.2.0] - 2026-09-08
