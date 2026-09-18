@@ -333,4 +333,4 @@ anything reaches the platform.
 
 ## Support
 
-support@stay22.com
+See https://dev.stay22.com/docs/mobile-sdk, or email support@stay22.com.
