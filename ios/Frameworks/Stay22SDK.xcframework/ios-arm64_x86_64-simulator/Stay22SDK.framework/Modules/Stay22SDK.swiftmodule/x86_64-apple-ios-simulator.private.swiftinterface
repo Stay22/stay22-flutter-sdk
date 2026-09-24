@@ -97,6 +97,10 @@ public struct NotificationAction {
   public static var ownsNotificationDelegate: Swift.Bool {
     get
   }
+  public static var managesNotificationDelegate: Swift.Bool {
+    get
+    set
+  }
   @_hasMissingDesignatedInitializers final public class Diagnostics {
     final public func run() async -> Stay22SDK.Stay22Diagnostics
     @discardableResult

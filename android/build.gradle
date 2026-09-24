@@ -3,7 +3,7 @@
 // Kotlin here (as the previous version did) forces a version on every consumer
 // and breaks any app on a different one.
 group 'com.stay22.flutter'
-version '1.2.0'
+version '1.3.0'
 
 buildscript {
     ext.safeExtGet = { prop, fallback ->
@@ -23,7 +23,7 @@ def resolvedCompileSdk = (flutterExt != null && flutterExt.hasProperty('compileS
         : safeExtGet('compileSdkVersion', 34)
 
 // Rewritten by scripts/sync-binaries.sh and checked by flutter-test.yml.
-def stay22SdkVersion = "1.2.0"
+def stay22SdkVersion = "1.3.0"
 
 android {
     namespace "com.stay22.flutter"
@@ -31,10 +31,12 @@ android {
     compileSdk resolvedCompileSdk
 
     defaultConfig {
-        // Hard-coded on purpose, unlike compileSdk above. 26 is the Stay22 SDK's
-        // own floor, so inheriting a lower value from the host would turn a clear
-        // "raise your minSdk" message into a confusing manifest merge failure.
-        minSdk 26
+        // Hard-coded on purpose, unlike compileSdk above. It tracks the uses-sdk
+        // minSdkVersion of the pinned `com.stay22:sdk` AAR, so a host below that
+        // floor gets a clear "raise your minSdk" message instead of a confusing
+        // manifest merge failure. Move it only when a published AAR advertises a
+        // different floor, and change the plugin README with it.
+        minSdk 24
     }
 
     compileOptions {
@@ -44,6 +46,14 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
+    }
+
+    testOptions {
+        // The guard under test runs before the plugin touches any Android API, so
+        // these tests need no emulator and no Robolectric. Returning defaults rather
+        // than throwing keeps an incidental android.jar call (a Log line on a path a
+        // test happens to cross) from failing a test about something else.
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -60,4 +70,6 @@ android {
 // restate.
 dependencies {
     implementation "com.stay22:sdk:${stay22SdkVersion}"
+
+    testImplementation "junit:junit:4.13.2"
 }

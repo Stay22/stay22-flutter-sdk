@@ -55,8 +55,18 @@
             Device ID, not a session token, whatever our own name for it suggests.
             Analytics is a real purpose and not padding: `loads`, `impression` and
             `fail_pn` are keyed by it in Mixpanel.
-            Linked stays false because the SDK has no account, login or user identity to
-            link it to; it identifies an install, not a person.
+            Linked is false and that is UNDER REVIEW, not settled. The reasoning that
+            put it there, "no account or login, so there is no identity to link to",
+            does not survive Apple's own wording, which counts linkage "via the user's
+            account, device, or other details". Our backend sends this same identifier as
+            Mixpanel's `distinct_id`, which is the analytics identity, alongside `ip`,
+            `userCity`, `userLatLng` and `userTimezone`
+            (monoco apps/frontend/src/server/routes/partner/index.ts, `trackProps`).
+            On that evidence Linked=true is the defensible answer.
+            Not flipped here on an engineer's judgement: the value is inherited into every
+            partner's own App Store privacy answers, and 1.2.0 already shipped with false,
+            so changing it is a legal and product call rather than a code fix. Raised for
+            that decision; do not "tidy" this comment away without one.
         -->
         <dict>
             <key>NSPrivacyCollectedDataType</key>

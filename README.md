@@ -8,8 +8,8 @@ The package version always equals the version of the native SDK it wraps.
 
 | Native SDK | Version | How it reaches your build |
 |---|---|---|
-| iOS (`Stay22SDK.xcframework`) | 1.2.0 | Bundled in this package. Nothing to set up. |
-| Android (`com.stay22:sdk`) | 1.2.0 | Fetched from Stay22's Maven repository — **one line to add**, below. |
+| iOS (`Stay22SDK.xcframework`) | 1.3.0 | Bundled in this package. Nothing to set up. |
+| Android (`com.stay22:sdk`) | 1.3.0 | Fetched from Stay22's Maven repository — **one line to add**, below. |
 
 The asymmetry is not a preference. CocoaPods embeds a bundled framework happily.
 Gradle will not: Flutter's own build tooling ignores any repository a plugin
@@ -22,7 +22,7 @@ it throws. Guard shared code with `Stay22.isSupportedPlatform`.
 ## Requirements
 
 - Flutter 3.19 or newer
-- Android API 26+
+- Android API 24+
 - iOS 15.0+
 
 ## Installation
@@ -35,7 +35,7 @@ dependencies:
   stay22_flutter:
     git:
       url: https://github.com/Stay22/stay22-flutter-sdk.git
-      ref: "1.2.0"
+      ref: "1.3.0"
 ```
 
 **`android/build.gradle.kts`** — add Stay22's Maven repository. Without it the
@@ -333,4 +333,4 @@ anything reaches the platform.
 
 ## Support
 
-See https://dev.stay22.com/docs/mobile-sdk, or email support@stay22.com.
+support@stay22.com

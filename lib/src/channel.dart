@@ -98,9 +98,14 @@ abstract final class Stay22Channel {
   /// already-broadcast stream a second time swallows its `onCancel` — the
   /// underlying controller's listener count never reaches zero, so the native
   /// side is never told the last Dart listener left and its `EventChannel`
-  /// stream handler leaks for the life of the engine. No event is lost either
-  /// way; the defect was purely that native cleanup never ran. Confirmed with
-  /// a standalone probe against a broadcast controller before this change.
+  /// stream handler leaks for the life of the engine — and events raised while
+  /// no Dart subscriber is attached are then lost, because native only buffers
+  /// once it has been told the last listener left. It instead pushes them into a
+  /// stream nobody is reading. So this is data loss, not just a leaked listener.
+  ///
+  /// An earlier probe here used a plain broadcast controller, which has no
+  /// buffer, and so could not show the loss; test/stay22_events_lifecycle_test
+  /// models the native buffer and does.
   static Stream<Object?> events() {
     if (!isSupported) {
       return Stream<Object?>.error(_unsupportedPlatform()).asBroadcastStream();

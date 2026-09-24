@@ -2548,6 +2548,102 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "managesNotificationDelegate",
+            "printedName": "managesNotificationDelegate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9Stay22SDK0A0C27managesNotificationDelegateSbvpZ",
+            "mangledName": "$s9Stay22SDK0A0C27managesNotificationDelegateSbvpZ",
+            "moduleName": "Stay22SDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9Stay22SDK0A0C27managesNotificationDelegateSbvgZ",
+                "mangledName": "$s9Stay22SDK0A0C27managesNotificationDelegateSbvgZ",
+                "moduleName": "Stay22SDK",
+                "static": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9Stay22SDK0A0C27managesNotificationDelegateSbvsZ",
+                "mangledName": "$s9Stay22SDK0A0C27managesNotificationDelegateSbvsZ",
+                "moduleName": "Stay22SDK",
+                "static": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9Stay22SDK0A0C27managesNotificationDelegateSbvMZ",
+                "mangledName": "$s9Stay22SDK0A0C27managesNotificationDelegateSbvMZ",
+                "moduleName": "Stay22SDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
             "kind": "TypeDecl",
             "name": "Diagnostics",
             "printedName": "Diagnostics",
@@ -5211,546 +5307,560 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/AppProber.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/AppProber.swift",
       "kind": "Array",
       "offset": 100,
       "length": 177,
       "value": "[(\"airbnb\", \"airbnb:\/\/\"), (\"booking\", \"booking:\/\/\"), (\"expedia\", \"expda:\/\/\"), (\"hotelscom\", \"hotelsapp:\/\/\"), (\"agoda\", \"agoda:\/\/\")]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/DateUtils.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/DateUtils.swift",
       "kind": "StringLiteral",
       "offset": 333,
       "length": 29,
       "value": "\"^(\\d{4})-(\\d{2})-(\\d{2})$\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/DateUtils.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/DateUtils.swift",
       "kind": "StringLiteral",
       "offset": 437,
       "length": 29,
       "value": "\"^(\\d{2})\/(\\d{2})\/(\\d{4})$\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Tracking\/EventTracker.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Tracking\/EventTracker.swift",
       "kind": "StringLiteral",
       "offset": 208,
       "length": 11,
       "value": "\"pushnotif\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Tracking\/EventTracker.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Tracking\/EventTracker.swift",
       "kind": "Dictionary",
       "offset": 273,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
       "kind": "StringLiteral",
       "offset": 78,
       "length": 24,
       "value": "\"https:\/\/www.stay22.com\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
       "kind": "StringLiteral",
       "offset": 138,
       "length": 13,
       "value": "\"\/allez\/roam\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
       "kind": "StringLiteral",
       "offset": 184,
       "length": 11,
       "value": "\"mobilesdk\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
       "kind": "StringLiteral",
       "offset": 227,
       "length": 11,
       "value": "\"pushnotif\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LinkBuilder.swift",
       "kind": "Array",
       "offset": 730,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 367,
       "length": 16,
       "value": "\"com.stay22.sdk\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 429,
       "length": 19,
       "value": "\"localnova_expires\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 487,
       "length": 12,
       "value": "\"session_id\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 557,
       "length": 32,
       "value": "\"pending_notification_signature\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 637,
       "length": 22,
       "value": "\"pending_nova_payload\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 708,
       "length": 24,
       "value": "\"pending_nova_fire_time\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 783,
       "length": 26,
       "value": "\"pending_nova_captured_at\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 863,
       "length": 29,
       "value": "\"pending_nova_local_cooldown\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 950,
       "length": 33,
       "value": "\"pending_nova_impression_claimed\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 1029,
       "length": 20,
       "value": "\"pending_nova_saved\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 1093,
       "length": 12,
       "value": "\"push_dest_\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 1142,
       "length": 13,
       "value": "\"sdk_enabled\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 1197,
       "length": 24,
       "value": "\"schedule_deadline_trip\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 1261,
       "length": 22,
       "value": "\"schedule_deadline_at\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "StringLiteral",
       "offset": 1322,
       "length": 12,
       "value": "\"app_probes\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "IntegerLiteral",
       "offset": 1410,
       "length": 2,
       "value": "15"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Storage\/LocalStore.swift",
       "kind": "IntegerLiteral",
       "offset": 1415,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LocationManager.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Core\/LocationManager.swift",
       "kind": "StringLiteral",
       "offset": 94,
       "length": 8,
       "value": "\"\u001F\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "StringLiteral",
       "offset": 742,
       "length": 25,
       "value": "\"Hotels in {destination}\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "StringLiteral",
       "offset": 828,
       "length": 35,
       "value": "\"Tap to find the best deals nearby\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "StringLiteral",
       "offset": 894,
       "length": 21,
       "value": "\"stay22_destinations\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "StringLiteral",
       "offset": 944,
       "length": 8,
       "value": "\"stay22\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "Array",
       "offset": 1221,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "Array",
       "offset": 1265,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "StringLiteral",
       "offset": 2472,
       "length": 19,
       "value": "\"stay22_attachment\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "BooleanLiteral",
       "offset": 3117,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "BooleanLiteral",
       "offset": 3162,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/NotificationConfig.swift",
       "kind": "BooleanLiteral",
       "offset": 3197,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "StringLiteral",
       "offset": 244,
       "length": 16,
       "value": "\"stay22_delayed\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "StringLiteral",
       "offset": 702,
       "length": 21,
       "value": "\"stay22_destinations\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "StringLiteral",
       "offset": 765,
       "length": 8,
       "value": "\"stay22\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "IntegerLiteral",
       "offset": 1091,
       "length": 2,
       "value": "64"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "BooleanLiteral",
-      "offset": 2371,
+      "offset": 2404,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3012,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "BooleanLiteral",
-      "offset": 2419,
+      "offset": 3060,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "Array",
-      "offset": 20576,
+      "offset": 21971,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
       "kind": "BooleanLiteral",
       "offset": 624,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 681,
       "length": 1,
       "value": "8"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 685,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 690,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 756,
       "length": 2,
       "value": "15"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 761,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 827,
       "length": 2,
       "value": "48"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 832,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Config\/PushConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 837,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
       "offset": 806,
       "length": 8,
       "value": "\"\u001F\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "IntegerLiteral",
       "offset": 878,
       "length": 1,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 7260,
+      "offset": 8552,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 7300,
+      "offset": 8592,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 7751,
+      "offset": 9043,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
-      "offset": 9706,
+      "offset": 10998,
       "length": 28,
       "value": "\"CFBundleShortVersionString\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
-      "offset": 9750,
+      "offset": 11042,
       "length": 9,
       "value": "\"unknown\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
-      "offset": 9799,
+      "offset": 11091,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 10430,
+      "offset": 11623,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "kind": "BooleanLiteral",
+      "offset": 11946,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "Dictionary",
-      "offset": 10480,
+      "offset": 11996,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 36500,
+      "offset": 40409,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 36531,
+      "offset": 40440,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
-      "offset": 50085,
+      "offset": 53994,
       "length": 9,
       "value": "\"cleared\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 68765,
+      "offset": 72672,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
       "kind": "StringLiteral",
       "offset": 659,
       "length": 5,
       "value": "\"GET\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
       "kind": "StringLiteral",
       "offset": 685,
       "length": 6,
       "value": "\"POST\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
       "kind": "StringLiteral",
       "offset": 731,
       "length": 24,
       "value": "\"https:\/\/www.stay22.com\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
       "kind": "IntegerLiteral",
       "offset": 810,
       "length": 2,
       "value": "15"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
       "kind": "IntegerLiteral",
       "offset": 868,
       "length": 2,
       "value": "20"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
       "kind": "BooleanLiteral",
       "offset": 1035,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
       "kind": "IntegerLiteral",
-      "offset": 10566,
+      "offset": 10655,
       "length": 3,
       "value": "240"
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22Diagnostics.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22Diagnostics.swift",
       "kind": "StringLiteral",
       "offset": 486,
       "length": 6,
       "value": "\"PASS\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22Diagnostics.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22Diagnostics.swift",
       "kind": "StringLiteral",
       "offset": 582,
       "length": 6,
       "value": "\"WARN\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/mobile_sdk\/mobile_sdk\/ios\/Sources\/Stay22SDK\/Stay22Diagnostics.swift",
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22Diagnostics.swift",
       "kind": "StringLiteral",
       "offset": 684,
       "length": 6,

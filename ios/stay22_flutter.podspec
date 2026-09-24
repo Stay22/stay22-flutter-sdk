@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "stay22_flutter"
-  s.version      = "1.2.0"
+  s.version      = "1.3.0"
   s.summary      = "Stay22 SDK for Flutter"
   s.description  = <<-DESC
     Turns explicit travel intent into a single, well-timed local notification

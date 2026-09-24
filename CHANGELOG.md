@@ -5,6 +5,19 @@ This project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-09-22
+### Changed
+- The package now supports Android 7.0 (API 24). It previously required Android 8.0
+  (API 26).
+- Both platforms now use the published native SDK 1.3.0.
+
+### Fixed
+- On iOS, the SDK now clears its stored travel context once a notification has been shown,
+  matching Android. Setting the same destination and dates again for a later trip could
+  previously be ignored.
+- On Android, tapping a notification after the app was killed now delivers the click event
+  when the SDK starts again, matching shown and blocked events.
+
 ## [1.2.0] - 2026-09-08
 ### Changed
 - The package now ships from its own repository,
@@ -22,8 +35,11 @@ This project adheres to [Semantic Versioning](https://semver.org).
   now throw a `PlatformException` with code `not_initialized` instead of reporting
   success while doing nothing. Both platforms behave identically. Settings you are meant
   to apply before `initialize`, including the `setEnabled` consent gate, are unaffected.
-- Cancelling the last `Stay22.events` subscription now releases the underlying native
-  listener instead of leaving it attached for the life of the app.
+- Events raised between subscriptions are no longer dropped. Cancelling the last
+  `Stay22.events` subscription now tells the native side, so it buffers what happens
+  next and replays it to your following subscriber. Previously the native listener
+  stayed attached for the life of the app, so it never buffered and those events were
+  delivered to nobody.
 - Offers now reach users who run a system-wide content or ad blocker on both platforms.
 
 ### Documentation

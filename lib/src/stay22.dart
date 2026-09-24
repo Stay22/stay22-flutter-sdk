@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import 'channel.dart';
 import 'diagnostics.dart';
 import 'notification_config.dart';
@@ -154,6 +156,16 @@ abstract final class Stay22 {
       .map((event) => Stay22Event.fromMap(event as Map<Object?, Object?>));
 
   static Stream<Stay22Event>? _events;
+
+  /// Drops the cached mapped stream. Tests only, and always paired with
+  /// [Stay22Channel.resetEventStream].
+  ///
+  /// Both layers cache for the life of the engine, which is what production
+  /// wants and what makes a listen/cancel/re-listen sequence untestable without
+  /// a reset on each: clearing only the raw stream would leave this map() still
+  /// wrapping the one just discarded.
+  @visibleForTesting
+  static void resetEventStreamForTest() => _events = null;
 
   /// Low-level hooks. Most apps need nothing here.
   static const Stay22Advanced advanced = Stay22Advanced._();
