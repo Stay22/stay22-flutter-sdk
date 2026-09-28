@@ -198,11 +198,23 @@ class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
             "isInitialized" -> handle(result) { Stay22.isInitialized }
 
             "setEnabled" -> handle(result) {
-                Stay22.isEnabled = call.requireBoolean("enabled")
+                val application = context.applicationContext as? Application
+                    ?: throw PluginError(
+                        "native_failure",
+                        "Stay22 needs an Application context to save consent.",
+                    )
+                Stay22.setEnabled(application, call.requireBoolean("enabled"))
                 null
             }
 
-            "isEnabled" -> handle(result) { Stay22.isEnabled }
+            "isEnabled" -> handle(result) {
+                val application = context.applicationContext as? Application
+                    ?: throw PluginError(
+                        "native_failure",
+                        "Stay22 needs an Application context to read consent.",
+                    )
+                Stay22.readEnabled(application)
+            }
 
             "setMedium" -> handle(result) {
                 Stay22.medium = call.requireString("medium")

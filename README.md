@@ -8,8 +8,8 @@ The package version always equals the version of the native SDK it wraps.
 
 | Native SDK | Version | How it reaches your build |
 |---|---|---|
-| iOS (`Stay22SDK.xcframework`) | 1.3.0 | Bundled in this package. Nothing to set up. |
-| Android (`com.stay22:sdk`) | 1.3.0 | Fetched from Stay22's Maven repository — **one line to add**, below. |
+| iOS (`Stay22SDK.xcframework`) | 1.4.0 | Bundled in this package. Nothing to set up. |
+| Android (`com.stay22:sdk`) | 1.4.0 | Fetched from Stay22's Maven repository — **one line to add**, below. |
 
 The asymmetry is not a preference. CocoaPods embeds a bundled framework happily.
 Gradle will not: Flutter's own build tooling ignores any repository a plugin
@@ -35,7 +35,7 @@ dependencies:
   stay22_flutter:
     git:
       url: https://github.com/Stay22/stay22-flutter-sdk.git
-      ref: "1.3.0"
+      ref: "1.4.0"
 ```
 
 **`android/build.gradle.kts`** — add Stay22's Maven repository. Without it the
@@ -60,6 +60,9 @@ Then declare your partner ID natively, so the SDK starts during app launch.
 ```xml
 <key>Stay22PartnerAID</key>
 <string>your-partner-id</string>
+<!-- Add this if your app requires an affirmative consent choice. -->
+<key>Stay22RequiresConsent</key>
+<true/>
 ```
 
 **`android/app/src/main/AndroidManifest.xml`**, inside `<application>`
@@ -68,6 +71,10 @@ Then declare your partner ID natively, so the SDK starts during app launch.
 <meta-data
     android:name="com.stay22.sdk.PartnerAID"
     android:value="your-partner-id" />
+<!-- Add this if your app requires an affirmative consent choice. -->
+<meta-data
+    android:name="com.stay22.sdk.RequiresConsent"
+    android:value="true" />
 ```
 
 This is strongly preferred over calling `Stay22.initialize` from Dart, and on iOS it
@@ -102,10 +109,11 @@ when to show it, and what to open.
 
 ## Consent And Permission
 
-`Stay22.setEnabled(false)` stops all scheduling and clears anything already pending.
-The value survives app restarts, so a user's opt-out is remembered, and it can be set
-before the SDK starts — which is what makes it usable as a consent gate rather than
-something you have to sequence carefully.
+`Stay22.setEnabled(false)` stops all scheduling and clears anything already pending,
+including a notification being prepared at the same time. The value survives app
+restarts and can be set before the SDK starts. If your app requires an affirmative
+consent choice, declare the native consent-required keys above, then pass the app's
+current choice to `setEnabled` on each launch before sending travel context.
 
 `requestNotificationPermission()` shows the system prompt and completes with what the
 user actually chose, on both platforms. It completes immediately with the current
@@ -236,10 +244,16 @@ one listener slot and this plugin holds it.
 delegate, chains to whatever was already there, and re-claims the slot whenever the
 app becomes active.
 
-If your app deliberately owns `UNUserNotificationCenter.delegate` — which
-`firebase_messaging` and `flutter_local_notifications` both do — check
-`Stay22.diagnostics.run()`. If the delegate check fails, forward the two callbacks
-from `ios/Runner/AppDelegate.swift`:
+If another library owns `UNUserNotificationCenter.delegate`, find which delegate
+receives taps and foreground notifications, then check whether it already forwards
+them to Stay22. The delegate check in `Stay22.diagnostics.run()` reports ownership,
+not whether callbacks were forwarded. Forward each callback through one path only;
+otherwise a tap can open the booking page and record the click twice.
+
+Use the following overrides only when your `AppDelegate` receives both callbacks
+and no other delegate forwards them through Stay22. If another delegate receives
+them, integrate there instead; if it already forwards through Stay22, do not add
+another path.
 
 ```swift
 import stay22_flutter
@@ -250,9 +264,6 @@ override func userNotificationCenter(
   didReceive response: UNNotificationResponse,
   withCompletionHandler completionHandler: @escaping () -> Void
 ) {
-  // The guard is required. When Stay22 owns the delegate it has already handled
-  // this response before calling you, and handling it twice opens the booking
-  // page twice and records two clicks.
   if !Stay22FlutterPlugin.ownsNotificationDelegate,
      Stay22FlutterPlugin.handleNotificationResponse(response) {
     completionHandler()
@@ -261,12 +272,25 @@ override func userNotificationCenter(
   super.userNotificationCenter(center, didReceive: response,
                                withCompletionHandler: completionHandler)
 }
+
+override func userNotificationCenter(
+  _ center: UNUserNotificationCenter,
+  willPresent notification: UNNotification,
+  withCompletionHandler completionHandler:
+    @escaping (UNNotificationPresentationOptions) -> Void
+) {
+  if !Stay22FlutterPlugin.ownsNotificationDelegate,
+     Stay22FlutterPlugin.isStay22Notification(notification) {
+    let shouldPresent = Stay22FlutterPlugin.handleWillPresentNotification(notification)
+    completionHandler(shouldPresent ? [.banner, .sound, .list] : [])
+    return
+  }
+  super.userNotificationCenter(center, willPresent: notification,
+                               withCompletionHandler: completionHandler)
+}
 ```
 
-`Stay22FlutterPlugin.handleWillPresentNotification(_:)` mirrors this for
-`willPresent`; present the notification with at least `[.banner, .sound, .list]` —
-dropping `.list` shows the banner and then loses the notification for good once it
-disappears. The example app implements both.
+Keep `.list` so an offer remains in Notification Centre after its banner disappears.
 
 ## Diagnostics
 

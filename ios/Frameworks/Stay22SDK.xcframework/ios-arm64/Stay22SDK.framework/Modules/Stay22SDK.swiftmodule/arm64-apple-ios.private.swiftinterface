@@ -94,6 +94,7 @@ public struct NotificationAction {
   public static func handleNotificationResponse(_ response: UserNotifications.UNNotificationResponse) -> Swift.Bool
   @discardableResult
   public static func handleWillPresentNotification(_ notification: UserNotifications.UNNotification) -> Swift.Bool
+  public static func isStay22Notification(_ notification: UserNotifications.UNNotification) -> Swift.Bool
   public static var ownsNotificationDelegate: Swift.Bool {
     get
   }

@@ -10,23 +10,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Xka/maz0mliht5omQU4ehvx09Jg=
+		57rBYQckIZNmD4MbVKgY+xth0fY=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		dFq8PO8hwulE7wNpeZbh3OmWJdQ=
+		0u5C2xT3tW/q6L3UfG5SiRgDmP8=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		WD2y/xrFL89DBbDmh5L4UENxcYM=
+		rTmCmj/WqgR8ZSsLejnaaUxq13I=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		G5xhx4a9piR+xHOCtd5mqm3BRJc=
+		54kmrVRQEzFBATyS3drDtSuNQ5g=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		WD2y/xrFL89DBbDmh5L4UENxcYM=
+		rTmCmj/WqgR8ZSsLejnaaUxq13I=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -50,28 +50,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3530N0286yntrwLCPIVeAshYqGH2trB5QpfOIVcvf34=
+			xhF2hFh0D730e9q3V+7dLBrqrkvtPlYf9oiQ3hWFSiE=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FfP61k2lc3Fqy3xKDRntddi3noNzKOlWgy3tTqNljaQ=
+			Vp9ZjpmssH1SxEo151hKQAtLKdHbmKOEAbHUUf5B50c=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EQGWOQF2Etd6OrEd6JSpvoTaneJj47ikzgxUPbvQaSU=
+			NWG1tKcUuT0cGzMAu2mDky1wz9dT43oIrWQRYHHGKYo=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FfP61k2lc3Fqy3xKDRntddi3noNzKOlWgy3tTqNljaQ=
+			Vp9ZjpmssH1SxEo151hKQAtLKdHbmKOEAbHUUf5B50c=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

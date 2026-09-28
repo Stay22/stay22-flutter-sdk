@@ -10,39 +10,39 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		lQeyOxhU22oKAmHOD7FjG101Kko=
+		ruQfFLph0aYh4zu/3UhtKLjG0GY=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		dFq8PO8hwulE7wNpeZbh3OmWJdQ=
+		0u5C2xT3tW/q6L3UfG5SiRgDmP8=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		7MOqiDR/E+SDFbJO0ulbmyPtkro=
+		ZApfeyCdiqGs0kyUmimjvOSWy2s=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		k9i4DW4NJYwz9KQcQ/fLPQAp1xs=
+		EUBvi+Q5myk8nQBl6PcHawmF/ZA=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		7MOqiDR/E+SDFbJO0ulbmyPtkro=
+		ZApfeyCdiqGs0kyUmimjvOSWy2s=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		dFq8PO8hwulE7wNpeZbh3OmWJdQ=
+		0u5C2xT3tW/q6L3UfG5SiRgDmP8=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		FJTN7gzePG7T27lPZYwDwDwPe80=
+		3Ywze73Qw5nQ4N3waZm2SnwOM/4=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		uZ/hIWdgXMJhwvyMEk758QGANP0=
+		FVDaltPJpLaHmkhKTTx0PLQFykI=
 		</data>
 		<key>Modules/Stay22SDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		FJTN7gzePG7T27lPZYwDwDwPe80=
+		3Ywze73Qw5nQ4N3waZm2SnwOM/4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -66,56 +66,56 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3530N0286yntrwLCPIVeAshYqGH2trB5QpfOIVcvf34=
+			xhF2hFh0D730e9q3V+7dLBrqrkvtPlYf9oiQ3hWFSiE=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			T80YQE4m1jZE7ffXk1U+iJKo50sQ0J7+QffLB6tdQsI=
+			aajq/ACXz1Pu2C0cb9lX5/df+lkSrcAvw7GMZOXXvtI=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zJA6xJcGV/GPfpJeXgZoaawAY0wjIDilDGRfhy8xw5Q=
+			9cjA8GZLQPIbGzasi9p7W05HasW3rkKVsQ2sn0Ihw+M=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			T80YQE4m1jZE7ffXk1U+iJKo50sQ0J7+QffLB6tdQsI=
+			aajq/ACXz1Pu2C0cb9lX5/df+lkSrcAvw7GMZOXXvtI=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3530N0286yntrwLCPIVeAshYqGH2trB5QpfOIVcvf34=
+			xhF2hFh0D730e9q3V+7dLBrqrkvtPlYf9oiQ3hWFSiE=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			r4Fh5Y7Hl2zdRxLaOABjOMPwtl83fN9Q+mtDm6wwgzU=
+			M2Syfr2rk113VmkMAXnqTs0b7Aau71tF/VCHzRjCtXY=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fCMUwA5k3IoqSxr8cbfRu/Y82Std8ug+lNhwQ7K0uno=
+			sba/gd4mayL7/xON0/95u0OXxe7Xx3OUdM8ccue1320=
 			</data>
 		</dict>
 		<key>Modules/Stay22SDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			r4Fh5Y7Hl2zdRxLaOABjOMPwtl83fN9Q+mtDm6wwgzU=
+			M2Syfr2rk113VmkMAXnqTs0b7Aau71tF/VCHzRjCtXY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

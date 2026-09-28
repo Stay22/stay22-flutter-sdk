@@ -33,12 +33,17 @@ public extension Stay22FlutterPlugin {
         Stay22.handleNotificationResponse(response)
     }
 
+    /// Identifies Stay22 requests, including ones retired after consent or context changed.
+    static func isStay22Notification(_ notification: UNNotification) -> Bool {
+        Stay22.isStay22Notification(notification)
+    }
+
     /// Tells Stay22 one of its notifications is about to appear while the app is
     /// in the foreground.
     ///
-    /// - Returns: true when the notification was Stay22's. Present it with at
-    ///   least `[.banner, .sound, .list]` — without `.list` the notification
-    ///   disappears with the banner and the user has no way back to it.
+    /// First check `isStay22Notification(_:)`. Present a Stay22 request with
+    /// `[.banner, .sound, .list]` only when this method returns true; use `[]`
+    /// when it returns false. Retired requests return false in the updated native SDK.
     @discardableResult
     static func handleWillPresentNotification(_ notification: UNNotification) -> Bool {
         Stay22.handleWillPresentNotification(notification)

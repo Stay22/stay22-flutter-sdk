@@ -5,6 +5,21 @@ This project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-09-25
+### Added
+- Declare the consent-required key in the app's native configuration to keep the SDK
+  disabled until your app passes its current consent choice to `Stay22.setEnabled`.
+- Built-in notifications use French text on devices set to French. Text supplied by
+  your app is unchanged.
+
+### Fixed
+- Disabling the SDK now cancels pending notifications, including one being prepared
+  at the same time. The Android consent choice is saved even before SDK initialization.
+- Clearing travel context now prevents a pending Android notification from appearing.
+
+### Changed
+- Both platforms now use the published native SDK 1.4.0.
+
 ## [1.3.0] - 2026-09-22
 ### Changed
 - The package now supports Android 7.0 (API 24). It previously required Android 8.0
