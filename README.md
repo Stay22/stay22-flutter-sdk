@@ -4,12 +4,13 @@ Captures the travel intent your app already knows about — where the user is go
 and when — and turns it into a single, well-timed local notification that opens a
 Stay22 accommodation booking page, credited to your partner ID.
 
-The package version always equals the version of the native SDK it wraps.
+This release wraps native SDK 1.6.0 on both platforms. Dart-only fixes may add a
+`+N` suffix to the package version without changing the native SDK.
 
 | Native SDK | Version | How it reaches your build |
 |---|---|---|
-| iOS (`Stay22SDK.xcframework`) | 1.4.0 | Bundled in this package. Nothing to set up. |
-| Android (`com.stay22:sdk`) | 1.4.0 | Fetched from Stay22's Maven repository — **one line to add**, below. |
+| iOS (`Stay22SDK.xcframework`) | 1.6.0 | Bundled in this package. Nothing to set up. |
+| Android (`com.stay22:sdk`) | 1.6.0 | Fetched from Stay22's Maven repository — **one line to add**, below. |
 
 The asymmetry is not a preference. CocoaPods embeds a bundled framework happily.
 Gradle will not: Flutter's own build tooling ignores any repository a plugin
@@ -35,7 +36,7 @@ dependencies:
   stay22_flutter:
     git:
       url: https://github.com/Stay22/stay22-flutter-sdk.git
-      ref: "1.4.0"
+      ref: "1.6.0"
 ```
 
 **`android/build.gradle.kts`** — add Stay22's Maven repository. Without it the

@@ -3,7 +3,7 @@
 // Kotlin here (as the previous version did) forces a version on every consumer
 // and breaks any app on a different one.
 group 'com.stay22.flutter'
-version '1.4.0'
+version '1.6.0'
 
 buildscript {
     ext.safeExtGet = { prop, fallback ->
@@ -23,7 +23,7 @@ def resolvedCompileSdk = (flutterExt != null && flutterExt.hasProperty('compileS
         : safeExtGet('compileSdkVersion', 34)
 
 // Rewritten by scripts/sync-binaries.sh and checked by flutter-test.yml.
-def stay22SdkVersion = "1.4.0"
+def stay22SdkVersion = "1.6.0"
 
 android {
     namespace "com.stay22.flutter"

@@ -5,6 +5,17 @@ This project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-10-01
+### Added
+- Support can inspect recent notification decisions, iOS scheduling, and Android posting history in device logs when testing your app, without adding logging code to your integration.
+
+### Changed
+- Both platforms now use the published native SDK 1.6.0.
+- The Flutter API does not expose the native `Stay22Error` listener; inspect platform logs for SDK errors and use `Stay22.diagnostics.run()` for current integration checks.
+
+### Fixed
+- On Android, unexpected native SDK failures return safe results instead of crashing the host app, and an unreadable stored consent setting is treated as disabled.
+
 ## [1.4.0] - 2026-09-25
 ### Added
 - Declare the consent-required key in the app's native configuration to keep the SDK

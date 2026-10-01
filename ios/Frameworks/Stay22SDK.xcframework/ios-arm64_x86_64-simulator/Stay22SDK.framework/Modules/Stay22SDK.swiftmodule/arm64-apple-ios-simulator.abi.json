@@ -34,6 +34,20 @@
       },
       {
         "kind": "Import",
+        "name": "os.log",
+        "printedName": "os.log",
+        "declKind": "Import",
+        "moduleName": "Stay22SDK"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "Stay22SDK"
+      },
+      {
+        "kind": "Import",
         "name": "UIKit",
         "printedName": "UIKit",
         "declKind": "Import",
@@ -3118,6 +3132,90 @@
               },
               {
                 "kind": "Function",
+                "name": "setErrorListener",
+                "printedName": "setErrorListener(_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any Stay22SDK.Stay22ErrorListener)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Stay22ErrorListener",
+                        "printedName": "any Stay22SDK.Stay22ErrorListener",
+                        "usr": "s:9Stay22SDK0A13ErrorListenerP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9Stay22SDK0A0C8AdvancedC16setErrorListeneryyAA0aeF0_pSgF",
+                "mangledName": "$s9Stay22SDK0A0C8AdvancedC16setErrorListeneryyAA0aeF0_pSgF",
+                "moduleName": "Stay22SDK",
+                "declAttributes": [
+                  "Final",
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "setErrorHandler",
+                "printedName": "setErrorHandler(_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((Stay22SDK.Stay22Error) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Stay22SDK.Stay22Error) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Stay22Error",
+                            "printedName": "Stay22SDK.Stay22Error",
+                            "usr": "s:9Stay22SDK0A5ErrorV"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9Stay22SDK0A0C8AdvancedC15setErrorHandleryyyAA0aE0VcSgF",
+                "mangledName": "$s9Stay22SDK0A0C8AdvancedC15setErrorHandleryyyAA0aE0VcSgF",
+                "moduleName": "Stay22SDK",
+                "declAttributes": [
+                  "Final",
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
                 "name": "setEventHandler",
                 "printedName": "setEventHandler(_:)",
                 "children": [
@@ -4044,6 +4142,352 @@
             "printedName": "Escapable",
             "usr": "s:s9EscapableP",
             "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "Stay22SDK"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Stay22Error",
+        "printedName": "Stay22Error",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "code",
+            "printedName": "code",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9Stay22SDK0A5ErrorV4codeSSvp",
+            "mangledName": "$s9Stay22SDK0A5ErrorV4codeSSvp",
+            "moduleName": "Stay22SDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9Stay22SDK0A5ErrorV4codeSSvg",
+                "mangledName": "$s9Stay22SDK0A5ErrorV4codeSSvg",
+                "moduleName": "Stay22SDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "entryPoint",
+            "printedName": "entryPoint",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9Stay22SDK0A5ErrorV10entryPointSSSgvp",
+            "mangledName": "$s9Stay22SDK0A5ErrorV10entryPointSSSgvp",
+            "moduleName": "Stay22SDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9Stay22SDK0A5ErrorV10entryPointSSSgvg",
+                "mangledName": "$s9Stay22SDK0A5ErrorV10entryPointSSSgvg",
+                "moduleName": "Stay22SDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "message",
+            "printedName": "message",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9Stay22SDK0A5ErrorV7messageSSvp",
+            "mangledName": "$s9Stay22SDK0A5ErrorV7messageSSvp",
+            "moduleName": "Stay22SDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9Stay22SDK0A5ErrorV7messageSSvg",
+                "mangledName": "$s9Stay22SDK0A5ErrorV7messageSSvg",
+                "moduleName": "Stay22SDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(code:entryPoint:message:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Stay22Error",
+                "printedName": "Stay22SDK.Stay22Error",
+                "usr": "s:9Stay22SDK0A5ErrorV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:9Stay22SDK0A5ErrorV4code10entryPoint7messageACSS_SSSgSStcfc",
+            "mangledName": "$s9Stay22SDK0A5ErrorV4code10entryPoint7messageACSS_SSSgSStcfc",
+            "moduleName": "Stay22SDK",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "==",
+            "printedName": "==(_:_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Stay22Error",
+                "printedName": "Stay22SDK.Stay22Error",
+                "usr": "s:9Stay22SDK0A5ErrorV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Stay22Error",
+                "printedName": "Stay22SDK.Stay22Error",
+                "usr": "s:9Stay22SDK0A5ErrorV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9Stay22SDK0A5ErrorV2eeoiySbAC_ACtFZ",
+            "mangledName": "$s9Stay22SDK0A5ErrorV2eeoiySbAC_ACtFZ",
+            "moduleName": "Stay22SDK",
+            "static": true,
+            "implicit": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:9Stay22SDK0A5ErrorV",
+        "mangledName": "$s9Stay22SDK0A5ErrorV",
+        "moduleName": "Stay22SDK",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "Stay22SDK"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Stay22ErrorListener",
+        "printedName": "Stay22ErrorListener",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "onError",
+            "printedName": "onError(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Stay22Error",
+                "printedName": "Stay22SDK.Stay22Error",
+                "usr": "s:9Stay22SDK0A5ErrorV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9Stay22SDK0A13ErrorListenerP02onC0yyAA0aC0VF",
+            "mangledName": "$s9Stay22SDK0A13ErrorListenerP02onC0yyAA0aC0VF",
+            "moduleName": "Stay22SDK",
+            "genericSig": "<τ_0_0 where τ_0_0 : Stay22SDK.Stay22ErrorListener>",
+            "sugared_genericSig": "<Self where Self : Stay22SDK.Stay22ErrorListener>",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:9Stay22SDK0A13ErrorListenerP",
+        "mangledName": "$s9Stay22SDK0A13ErrorListenerP",
+        "moduleName": "Stay22SDK",
+        "genericSig": "<τ_0_0 : AnyObject>",
+        "sugared_genericSig": "<Self : AnyObject>",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
           }
         ]
       },
@@ -5372,6 +5816,111 @@
       "value": "\"^(\\d{2})\/(\\d{2})\/(\\d{4})$\""
     },
     {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "StringLiteral",
+      "offset": 393,
+      "length": 3,
+      "value": "\"t\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "StringLiteral",
+      "offset": 477,
+      "length": 22,
+      "value": "\"diagnostic_events_v1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "StringLiteral",
+      "offset": 536,
+      "length": 23,
+      "value": "\"diagnostic_dropped_v1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "StringLiteral",
+      "offset": 596,
+      "length": 23,
+      "value": "\"diagnostic_attempt_v1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "StringLiteral",
+      "offset": 664,
+      "length": 29,
+      "value": "\"diagnostic_notifications_v1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "StringLiteral",
+      "offset": 740,
+      "length": 34,
+      "value": "\"diagnostic_notification_order_v1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "StringLiteral",
+      "offset": 818,
+      "length": 31,
+      "value": "\"diagnostic_delivery_stages_v1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "IntegerLiteral",
+      "offset": 885,
+      "length": 3,
+      "value": "128"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "IntegerLiteral",
+      "offset": 998,
+      "length": 1,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1044,
+      "length": 2,
+      "value": "48"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1049,
+      "length": 2,
+      "value": "60"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1054,
+      "length": 2,
+      "value": "60"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1059,
+      "length": 5,
+      "value": "1000"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "StringLiteral",
+      "offset": 1150,
+      "length": 16,
+      "value": "\"com.stay22.sdk\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Diagnostics\/DiagnosticJournal.swift",
+      "kind": "StringLiteral",
+      "offset": 1178,
+      "length": 13,
+      "value": "\"diagnostics\""
+    },
+    {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Tracking\/EventTracker.swift",
       "kind": "StringLiteral",
       "offset": 208,
@@ -5738,21 +6287,21 @@
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "BooleanLiteral",
-      "offset": 10663,
+      "offset": 10849,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "Array",
-      "offset": 24675,
+      "offset": 25154,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Notification\/NotificationService.swift",
       "kind": "BooleanLiteral",
-      "offset": 24716,
+      "offset": 25195,
       "length": 5,
       "value": "false"
     },
@@ -5850,105 +6399,119 @@
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 10587,
+      "offset": 10698,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 10821,
+      "offset": 10932,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "IntegerLiteral",
-      "offset": 10863,
+      "offset": 10974,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
-      "offset": 10940,
+      "offset": 11051,
       "length": 23,
       "value": "\"Stay22RequiresConsent\""
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 10977,
+      "offset": 11088,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
-      "offset": 15076,
+      "offset": 15187,
       "length": 28,
       "value": "\"CFBundleShortVersionString\""
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
-      "offset": 15120,
+      "offset": 15231,
       "length": 9,
       "value": "\"unknown\""
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
-      "offset": 15169,
+      "offset": 15280,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 15771,
+      "offset": 15882,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "kind": "Array",
+      "offset": 16518,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
+      "kind": "IntegerLiteral",
+      "offset": 16699,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 16094,
+      "offset": 17432,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "Dictionary",
-      "offset": 16144,
+      "offset": 17482,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 47510,
+      "offset": 56176,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 47541,
+      "offset": 56207,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "StringLiteral",
-      "offset": 64377,
+      "offset": 78522,
       "length": 9,
       "value": "\"cleared\""
     },
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Stay22.swift",
       "kind": "BooleanLiteral",
-      "offset": 90283,
+      "offset": 106443,
       "length": 5,
       "value": "false"
     },
@@ -5997,7 +6560,7 @@
     {
       "filePath": "\/Users\/runner\/work\/monoco\/monoco\/libs\/mobile-sdk\/ios\/Sources\/Stay22SDK\/Internal\/Network\/Stay22Api.swift",
       "kind": "IntegerLiteral",
-      "offset": 11807,
+      "offset": 12122,
       "length": 3,
       "value": "240"
     },

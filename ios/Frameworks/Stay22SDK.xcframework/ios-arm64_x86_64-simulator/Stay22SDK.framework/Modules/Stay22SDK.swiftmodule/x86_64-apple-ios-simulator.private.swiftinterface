@@ -128,6 +128,12 @@ public struct NotificationAction {
     final public func setEventListener(_ listener: (any Stay22SDK.Stay22EventListener)?)
     #endif
     #if compiler(>=5.3) && $NonescapableTypes
+    final public func setErrorListener(_ listener: (any Stay22SDK.Stay22ErrorListener)?)
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    final public func setErrorHandler(_ handler: ((Stay22SDK.Stay22Error) -> Swift.Void)?)
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     final public func setEventHandler(_ handler: ((Stay22SDK.Stay22Event) -> Swift.Void)?)
     #endif
     final public func clearTravelContext()
@@ -166,6 +172,18 @@ public struct Stay22Diagnostics {
     get
   }
   public func describe() -> Swift.String
+}
+public struct Stay22Error : Swift.Equatable {
+  public let code: Swift.String
+  public let entryPoint: Swift.String?
+  public let message: Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(code: Swift.String, entryPoint: Swift.String? = nil, message: Swift.String)
+  #endif
+  public static func == (a: Stay22SDK.Stay22Error, b: Stay22SDK.Stay22Error) -> Swift.Bool
+}
+public protocol Stay22ErrorListener : AnyObject {
+  func onError(_ error: Stay22SDK.Stay22Error)
 }
 public enum Stay22Event {
   case locationUpdated(destination: Swift.String)
