@@ -6,8 +6,10 @@ import 'validation.dart';
 /// at least one of [address], [hotelName] or a coordinate pair to have a
 /// destination to work with; without one, scheduling is skipped.
 ///
-/// Setting a travel context replaces the previous one outright. There is no
-/// merge, so omitting a field clears it rather than keeping the old value.
+/// Destination, hotel name, coordinates and dates update the current trip;
+/// omitted values stay. A guest-only update to an existing trip is ignored.
+/// To change only guest counts, clear and resend the full context. Call
+/// `Stay22.clearTravelContext()` before an unrelated trip.
 class TravelContext {
   /// City, venue, hotel or formatted location, e.g. `"Paris, France"`.
   final String? address;
