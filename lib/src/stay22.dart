@@ -106,8 +106,10 @@ abstract final class Stay22 {
 
   /// Hands the SDK the user's travel intent.
   ///
-  /// This replaces any previous context outright. Automatic scheduling is
-  /// evaluated when the app next goes to the background.
+  /// Destination, hotel name, coordinates and dates update the current trip;
+  /// omitted values stay. A guest-only update to an existing trip is ignored.
+  /// To change only guest counts, clear and resend the full context. Automatic
+  /// scheduling is evaluated when the app next goes to the background.
   static Future<void> setTravelContext(TravelContext context) async {
     await Stay22Channel.invoke<void>('setTravelContext', context.toMap());
   }
