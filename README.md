@@ -139,11 +139,13 @@ await Stay22.setTravelContext(TravelContext(
 ));
 ```
 
-`setTravelContext` merges non-empty fields, so you can add dates and a hotel name to the
-same trip in separate calls. Before an unrelated trip search, call
-`Stay22.clearTravelContext()` so fields from the previous trip do not carry over. Dates
-are validated in Dart, including rejecting dates that do not exist, so a typo throws at
-your call site rather than producing a booking link for the 30th of February.
+Destination, hotel name, coordinates and dates can be added to the same trip in separate
+`setTravelContext` calls; omitted values remain. A later call that changes only `adults`
+or `children` is ignored. To update only guest counts, clear the context and send the full
+trip again. Before an unrelated trip search, call `Stay22.clearTravelContext()` so fields
+from the previous trip do not carry over. Dates are validated in Dart, including rejecting
+dates that do not exist, so a typo throws at your call site rather than producing a booking
+link for the 30th of February.
 
 ## Notification Appearance
 
