@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 import 'channel.dart';
 import 'diagnostics.dart';
 import 'notification_config.dart';
+import 'notifications.dart';
 import 'stay22_event.dart';
 import 'travel_context.dart';
 import 'validation.dart';
@@ -16,18 +18,17 @@ import 'validation.dart';
 /// offering accommodation there, opening a Stay22 booking page when it is
 /// tapped.
 ///
-/// Every call returns a `Future` and completes with a [PlatformException] on
-/// failure, so a mistake in wiring surfaces at the call site rather than in a
-/// native log nobody reads.
+/// Notification commands return durable acknowledgments. Inspect their outcome and
+/// query current state for later server and OS results. Transport failures throw
+/// [PlatformException].
 ///
 /// ```dart
-/// await Stay22.initialize(aid: 'your-partner-id');
-/// await Stay22.setEnabled(userHasOptedIn);
-/// await Stay22.requestNotificationPermission();
-/// await Stay22.setTravelContext(TravelContext(
-///   address: 'Paris, France',
-///   checkinDate: '2026-03-20',
-///   checkoutDate: '2026-03-25',
+/// final now = DateTime.now().millisecondsSinceEpoch;
+/// final result = await Stay22.ensureNotification(NotificationRequest(
+///   trip: TravelContext(address: 'Paris, France'),
+///   timing: const NotificationTiming.after(delayMs: 60000),
+///   expiresAtMs: now + 3600000,
+///   actionExpiresAtMs: now + 7200000,
 /// ));
 /// ```
 abstract final class Stay22 {
@@ -74,15 +75,6 @@ abstract final class Stay22 {
 
   static Future<bool> isEnabled() => Stay22Channel.invokeBool('isEnabled');
 
-  /// Attribution `medium` written onto the booking link the notification opens.
-  ///
-  /// This is how the resulting booking gets credited. Defaults to `pushnotif`.
-  static Future<void> setMedium(String medium) async {
-    await Stay22Channel.invoke<void>('setMedium', {
-      'medium': requireNonBlank(medium, 'medium'),
-    });
-  }
-
   /// Optional attribution `campaign` on the booking link. Pass null to clear.
   static Future<void> setCampaignId(String? campaignId) async {
     await Stay22Channel.invoke<void>('setCampaignId', {
@@ -104,17 +96,79 @@ abstract final class Stay22 {
   static Future<bool> requestNotificationPermission() =>
       Stay22Channel.invokeBool('requestNotificationPermission');
 
-  /// Hands the SDK the user's travel intent.
-  ///
-  /// Destination, hotel name, coordinates and dates update the current trip;
-  /// omitted values stay. A guest-only update to an existing trip is ignored.
-  /// To change only guest counts, clear and resend the full context. Automatic
-  /// scheduling is evaluated when the app next goes to the background.
-  static Future<void> setTravelContext(TravelContext context) async {
-    await Stay22Channel.invoke<void>('setTravelContext', context.toMap());
+  /// Ensures one complete normal intent. Identical retries retain its original anchor.
+  static Future<NotificationResult> ensureNotification(
+          NotificationRequest request) =>
+      _notificationCall(
+          'ensureNotification', request.toMap(), NotificationResult.fromMap);
+
+  /// Changes a pending intent using a saved expected reference. A stale reference conflicts.
+  /// Omitted windows remove the caller restriction; omitted deadlines need cached policy.
+  static Future<NotificationResult> updateNotification({
+    required NotificationReference reference,
+    required NotificationTiming timing,
+    NotificationAllowedWindows? allowedWindows,
+    int? expiresAtMs,
+    int? actionExpiresAtMs,
+  }) =>
+      _notificationCall(
+          'updateNotification',
+          {
+            'reference': reference.toMap(),
+            'timing': timing.toMap(),
+            if (allowedWindows != null)
+              'allowedWindows': allowedWindows.toMap(),
+            if (expiresAtMs != null) 'expiresAtMs': expiresAtMs,
+            if (actionExpiresAtMs != null)
+              'actionExpiresAtMs': actionExpiresAtMs,
+          },
+          NotificationResult.fromMap);
+
+  /// Revokes the old trip before evaluating its complete replacement.
+  static Future<NotificationResult> replaceNotification({
+    required NotificationReference reference,
+    required NotificationRequest request,
+  }) =>
+      _notificationCall(
+          'replaceNotification',
+          {
+            'reference': reference.toMap(),
+            'request': request.toMap(),
+          },
+          NotificationResult.fromMap);
+
+  static Future<NotificationResult> cancelNotification(
+          NotificationReference reference) =>
+      _notificationCall('cancelNotification', {'reference': reference.toMap()},
+          NotificationResult.fromMap);
+
+  /// Reads receipts and independent OS observations without recovery or scheduling.
+  static Future<NotificationQuery> getNotificationState() => _notificationCall(
+      'getNotificationState', null, NotificationQuery.fromMap);
+
+  /// Runs one isolated diagnostic using the native fixed delay and expiry policy.
+  static Future<NotificationResult> scheduleDiagnosticNotification(
+          TravelContext trip) =>
+      _notificationCall('scheduleDiagnosticNotification',
+          {'trip': trip.toMap()}, NotificationResult.fromMap);
+
+  static Future<T> _notificationCall<T>(
+      String method,
+      Map<String, Object?>? arguments,
+      T Function(Map<Object?, Object?>) decode) async {
+    final payload = await Stay22Channel.invokeMap(method, arguments);
+    try {
+      return decode(payload);
+    } on FormatException catch (error) {
+      throw PlatformException(
+          code: Stay22ErrorCode.nativeFailure,
+          message: '$method returned an invalid payload: ${error.message}');
+    }
   }
 
-  /// Clears the travel context and any pending notification.
+  /// Revokes both normal and diagnostic work and actions; retains owed reports.
+  @Deprecated(
+      'Use cancelNotification with a saved reference for revision-checked cancellation.')
   static Future<void> clearTravelContext() async {
     await Stay22Channel.invoke<void>('clearTravelContext');
   }
@@ -183,21 +237,8 @@ abstract final class Stay22 {
 class Stay22Advanced {
   const Stay22Advanced._();
 
-  /// Runs the scheduling pipeline now instead of waiting for the app to be
-  /// backgrounded.
-  ///
-  /// Only the background trigger is bypassed. Home-city suppression, the local
-  /// cooldown, the server decision and the partner kill switch all still apply.
-  ///
-  /// Set [force] to skip the local gates and the server's per-device cooldown
-  /// for this one call and shorten the delay to a few seconds, so the pipeline
-  /// can be verified by hand. It writes no cooldown and no server lock, so it
-  /// stays repeatable, and it never bypasses the partner kill switch. For
-  /// integration testing only.
-  Future<void> scheduleNotification({bool force = false}) async {
-    await Stay22Channel.invoke<void>('scheduleNotification', {'force': force});
-  }
-
+  /// Revokes both normal and diagnostic work and actions.
+  @Deprecated('Use Stay22.cancelNotification with a saved reference.')
   Future<void> clearTravelContext() async {
     await Stay22Channel.invoke<void>('clearTravelContext');
   }
@@ -206,11 +247,6 @@ class Stay22Advanced {
 /// Testing-only overrides for local and staging validation.
 class Stay22Testing {
   const Stay22Testing._();
-
-  /// Force mode: a few seconds' delay, local gates skipped, repeatable.
-  Future<void> setForce(bool enabled) async {
-    await Stay22Channel.invoke<void>('setForce', {'enabled': enabled});
-  }
 
   /// Writes SDK activity to the platform log.
   Future<void> setShowLogs(bool enabled) async {

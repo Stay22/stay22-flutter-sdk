@@ -1,3 +1,5 @@
+import 'notifications.dart';
+
 /// Events the SDK emits.
 ///
 /// Delivered on the platform thread by both native SDKs, so a listener runs on
@@ -18,6 +20,10 @@ sealed class Stay22Event {
     String str(String key) => map[key] as String? ?? '';
 
     return switch (type) {
+      'notificationChanged' => NotificationChanged(
+          receipt: NotificationReceipt.fromMap(
+              map['receipt'] as Map<Object?, Object?>),
+        ),
       'locationUpdated' => LocationUpdated(destination: str('destination')),
       'notificationScheduled' => NotificationScheduled(
           destination: str('destination'),
@@ -67,7 +73,8 @@ final class NotificationShown extends Stay22Event {
   const NotificationShown({required this.destination});
 }
 
-/// The user tapped a Stay22 notification. [url] is the booking link opened.
+/// The user tapped a Stay22 notification. [url] is the Stay22 booking page link
+/// saved with the notification, even when the tap opens a booking app.
 final class NotificationClicked extends Stay22Event {
   final String destination;
   final String url;
@@ -80,7 +87,7 @@ final class NotificationBlocked extends Stay22Event {
   const NotificationBlocked({required this.reason});
 }
 
-/// Scheduling was skipped, e.g. the destination matched the user's home city.
+/// Scheduling was skipped, e.g. the partner configuration disabled notifications.
 final class NotificationSkipped extends Stay22Event {
   final String reason;
   const NotificationSkipped({required this.reason});
@@ -101,4 +108,10 @@ final class EnabledChanged extends Stay22Event {
 /// Explicit travel context was cleared.
 final class TravelContextCleared extends Stay22Event {
   const TravelContextCleared();
+}
+
+/// Correlated durable state. A queued entry does not prove visible presentation.
+final class NotificationChanged extends Stay22Event {
+  final NotificationReceipt receipt;
+  const NotificationChanged({required this.receipt});
 }

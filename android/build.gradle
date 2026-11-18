@@ -3,7 +3,7 @@
 // Kotlin here (as the previous version did) forces a version on every consumer
 // and breaks any app on a different one.
 group 'com.stay22.flutter'
-version '1.6.0'
+version '3.1.1'
 
 buildscript {
     ext.safeExtGet = { prop, fallback ->
@@ -23,7 +23,7 @@ def resolvedCompileSdk = (flutterExt != null && flutterExt.hasProperty('compileS
         : safeExtGet('compileSdkVersion', 34)
 
 // Rewritten by scripts/sync-binaries.sh and checked by flutter-test.yml.
-def stay22SdkVersion = "1.6.0"
+def stay22SdkVersion = "3.1.1"
 
 android {
     namespace "com.stay22.flutter"
@@ -68,6 +68,7 @@ android {
 // dependencies are Gradle's problem rather than something this file has to
 // restate.
 dependencies {
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
     implementation "com.stay22:sdk:${stay22SdkVersion}"
 
     testImplementation "junit:junit:4.13.2"

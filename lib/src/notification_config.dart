@@ -77,12 +77,12 @@ class NotificationAction {
 /// Setting a config replaces it entirely — an omitted field falls back to the
 /// SDK default, it does not retain what a previous call set.
 class NotificationConfig {
-  /// Native default: `"Hotels in {destination}"`.
+  /// When unset, your account's text, then the built-in `"Hotels in {destination}"`.
   final String? title;
 
   final String? subtitle;
 
-  /// Native default: `"Tap to find the best deals nearby"`.
+  /// When unset, your account's text, then the built-in `"Tap to find the best deals nearby"`.
   final String? message;
 
   /// Native default: `"stay22_destinations"`.

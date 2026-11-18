@@ -4,13 +4,12 @@ Captures the travel intent your app already knows about — where the user is go
 and when — and turns it into a single, well-timed local notification that opens a
 Stay22 accommodation booking page, credited to your partner ID.
 
-This release wraps native SDK 1.6.0 on both platforms. Dart-only fixes may add a
-`+N` suffix to the package version without changing the native SDK.
+This release wraps native SDK 3.1.1 on both platforms.
 
 | Native SDK | Version | How it reaches your build |
 |---|---|---|
-| iOS (`Stay22SDK.xcframework`) | 1.6.0 | Bundled in this package. Nothing to set up. |
-| Android (`com.stay22:sdk`) | 1.6.0 | Fetched from Stay22's Maven repository — **one line to add**, below. |
+| iOS (`Stay22SDK.xcframework`) | 3.1.1 | Bundled in this package. Nothing to set up. |
+| Android (`com.stay22:sdk`) | 3.1.1 | Fetched from Stay22's Maven repository — **one line to add**, below. |
 
 The asymmetry is not a preference. CocoaPods embeds a bundled framework happily.
 Gradle will not: Flutter's own build tooling ignores any repository a plugin
@@ -31,12 +30,15 @@ it throws. Guard shared code with `Stay22.isSupportedPlatform`.
 The package is distributed from its own public repository, pinned to a release tag.
 It is not on pub.dev.
 
+The examples below describe this source tree. For a released package, use the README
+at the tag you install; the published package may expose a different API.
+
 ```yaml
 dependencies:
   stay22_flutter:
     git:
       url: https://github.com/Stay22/stay22-flutter-sdk.git
-      ref: "1.6.0"
+      ref: "3.1.1"
 ```
 
 **`android/build.gradle.kts`** — add Stay22's Maven repository. Without it the
@@ -98,15 +100,20 @@ await Stay22.setEnabled(userHasOptedInToStay22Offers);
 
 await Stay22.requestNotificationPermission();
 
-await Stay22.setTravelContext(TravelContext(
-  address: 'Paris, France',
-  checkinDate: '2026-03-20',
-  checkoutDate: '2026-03-25',
-));
+// Illustrative app-chosen validity bounds, not SDK defaults.
+final now = DateTime.now().millisecondsSinceEpoch;
+final request = NotificationRequest(
+  trip: TravelContext(address: 'Paris, France'),
+  timing: const NotificationTiming.after(delayMs: 30 * 60 * 1000),
+  expiresAtMs: now + 12 * 60 * 60 * 1000,
+  actionExpiresAtMs: now + 24 * 60 * 60 * 1000,
+);
+final result = await Stay22.ensureNotification(request);
 ```
 
-That is the whole integration. The SDK decides whether an offer is worth showing,
-when to show it, and what to open.
+Inspect `result.outcome` and `result.reason`, and save the receipt's reference when one
+is returned. Submission is an acknowledgement; preparation can still reject the offer.
+Retain the same request and deadlines when retrying the same occurrence.
 
 ## Consent And Permission
 
@@ -127,25 +134,23 @@ Supply what your app knows. Every field is optional, but the SDK needs at least 
 address, a hotel name or coordinates to have somewhere to offer.
 
 ```dart
-await Stay22.setTravelContext(TravelContext(
+final trip = TravelContext(
   address: 'Paris, France',
   latitude: 48.8566,
   longitude: 2.3522,
-  checkinDate: '2026-03-20',   // YYYY-MM-DD or MM/DD/YYYY
-  checkoutDate: '2026-03-25',
+  checkinDate: '2027-03-20',   // YYYY-MM-DD
+  checkoutDate: '2027-03-25',
   hotelName: 'Hotel Example',
   adults: 2,
   children: 1,
-));
+);
 ```
 
-Destination, hotel name, coordinates and dates can be added to the same trip in separate
-`setTravelContext` calls; omitted values remain. A later call that changes only `adults`
-or `children` is ignored. To update only guest counts, clear the context and send the full
-trip again. Before an unrelated trip search, call `Stay22.clearTravelContext()` so fields
-from the previous trip do not carry over. Dates are validated in Dart, including rejecting
-dates that do not exist, so a typo throws at your call site rather than producing a booking
-link for the 30th of February.
+Each request carries a complete trip. Omitted fields do not inherit values from an earlier
+request, so collect partial form data in your app before submitting it. For a different
+trip, use `replaceNotification` with the saved reference and the complete new request.
+Replacement revokes the previous offer before preparing the new one, even if the new
+request is rejected.
 
 ## Notification Appearance
 
@@ -160,12 +165,14 @@ await Stay22.setNotificationConfig(NotificationConfig(
 
 `{destination}`, `{checkin}` and `{checkout}` are filled in when the notification is
 scheduled; the date placeholders resolve to empty when no dates are set. Omitting a
-field uses the SDK default rather than keeping whatever a previous call set.
+field resets it rather than keeping whatever a previous call set. An unset `title` or
+`message` shows your account's text for the trip, then the built-in text; set both to
+keep fixed text.
 
 | Field | Default |
 |---|---|
-| `title` | `Hotels in {destination}` |
-| `message` | `Tap to find the best deals nearby` |
+| `title` | unset: your account's text, else `Hotels in {destination}` |
+| `message` | unset: your account's text, else `Tap to find the best deals nearby` |
 | `categoryId` | `stay22_destinations` |
 | `threadId` | `stay22` |
 
@@ -175,7 +182,7 @@ Attachments must be local files. Download a remote image first and pass the path
 
 The SDK checks which booking apps are installed so the offer can open the one the
 user already has, signed in, with a saved card. iOS only answers that question for
-schemes the host app declares, and silently reports "not installed" otherwise.
+schemes the host app declares, and treats any other app as unknown.
 
 Add all five to `ios/Runner/Info.plist`:
 
@@ -194,30 +201,28 @@ Android needs nothing — the equivalent declaration ships inside the SDK.
 
 ## Scheduling
 
-Automatic scheduling is evaluated when the app goes to the background. To run the
-pipeline by hand:
+Use `ensureNotification` to submit a trip and timing request. Timing can use the account
+default, a delay, a not-before time or a fixed time. Timestamps and durations are in
+milliseconds. Give execution and notification actions separate expiry deadlines, as in the
+quick start; if omitted, a valid cached account policy must supply them.
 
-```dart
-await Stay22.advanced.scheduleNotification();
-```
-
-That bypasses only the background trigger. Home-city suppression, the local cooldown,
-the server's decision and your partner configuration all still apply. Pass
-`force: true` during integration testing to skip the local gates and shorten the delay
-to a few seconds; it writes no cooldown, so it is repeatable, and it never overrides
-the partner kill switch.
+Use the saved reference with `updateNotification` to change timing, `replaceNotification`
+to replace a trip, or `cancelNotification` to cancel it. Retain the original reference and
+arguments when retrying a command. An update supplies a complete new timing intent:
+omitting `allowedWindows` removes your restriction, and omitted deadlines require a valid
+cached account policy. Read `getNotificationState()` or listen for `NotificationChanged`
+to inspect later state. A queued notification does not prove that the operating system
+displayed it at the selected time.
 
 ## Events
 
 ```dart
 Stay22.events.listen((event) {
   switch (event) {
-    case NotificationScheduled(:final destination, :final delay):
-      print('$destination in ${delay.inMinutes} min');
+    case NotificationChanged(:final receipt):
+      print('${receipt.id}: ${receipt.requestStatus} ${receipt.execution?.phase}');
     case NotificationClicked(:final destination, :final url):
       print('Tapped $destination → $url');
-    case NotificationBlocked(:final reason):
-      print('Blocked: $reason');
     default:
       break;
   }
@@ -225,10 +230,14 @@ Stay22.events.listen((event) {
 ```
 
 The hierarchy is sealed, so an exhaustive `switch` tells you at compile time when a
-new event appears.
+new event appears. Follow a notification's lifecycle with `NotificationChanged`; the SDK
+no longer emits `LocationUpdated`, `NotificationScheduled`, `NotificationShown`,
+`NotificationSkipped`, `NotificationBlocked` or `NotificationCancelled` for new
+notifications.
 
 | Event | Carries |
 |---|---|
+| `NotificationChanged` | `receipt` |
 | `LocationUpdated` | `destination` |
 | `NotificationScheduled` | `destination`, `delay` (a `Duration`) |
 | `NotificationShown` | `destination` |
@@ -316,11 +325,12 @@ nothing.
 
 ```dart
 await Stay22.testing.setShowLogs(true);
-await Stay22.testing.setForce(true);      // ~5s delay, local gates skipped
-await Stay22.testing.setBaseUrl('https://staging.example.com');
+final result = await Stay22.scheduleDiagnosticNotification(
+  TravelContext(address: 'Paris, France'),
+);
 ```
 
-Never ship with these enabled.
+This is a per-call diagnostic. Use test controls only in internal builds.
 
 ## Example App
 
@@ -330,8 +340,7 @@ what compiles the plugin's Kotlin and Swift in CI.
 
 ## Privacy
 
-The SDK never asks for device GPS permission. The IP-derived home city is used only to
-suppress offers where the user already lives, never as a destination to advertise.
+The SDK never asks for device GPS permission.
 Notifications are gated on `Stay22.setEnabled` and should be treated as promotional.
 
 ## API Summary
@@ -342,24 +351,27 @@ Notifications are gated on `Stay22.setEnabled` and should be treated as promotio
 | `Stay22.initialize(aid:)` | `Future<void>` |
 | `Stay22.isInitialized()` | `Future<bool>` |
 | `Stay22.setEnabled(bool)` / `isEnabled()` | `Future<void>` / `Future<bool>` |
-| `Stay22.setMedium(String)` / `setCampaignId(String?)` | `Future<void>` |
+| `Stay22.setCampaignId(String?)` | `Future<void>` |
 | `Stay22.hasNotificationPermission()` | `Future<bool>` |
 | `Stay22.requestNotificationPermission()` | `Future<bool>` |
-| `Stay22.setTravelContext(TravelContext)` | `Future<void>` |
-| `Stay22.clearTravelContext()` | `Future<void>` |
+| `Stay22.ensureNotification(request)` | `Future<NotificationResult>` |
+| `Stay22.updateNotification(...)` | `Future<NotificationResult>` |
+| `Stay22.replaceNotification(...)` | `Future<NotificationResult>` |
+| `Stay22.cancelNotification(reference)` | `Future<NotificationResult>` |
+| `Stay22.getNotificationState()` | `Future<NotificationQuery>` |
+| `Stay22.scheduleDiagnosticNotification(trip)` | `Future<NotificationResult>` |
+| `Stay22.clearTravelContext()` (deprecated) | `Future<void>` |
 | `Stay22.setNotificationConfig(NotificationConfig)` | `Future<void>` |
 | `Stay22.ownsNotificationDelegate()` | `Future<bool>` |
 | `Stay22.events` | `Stream<Stay22Event>` |
-| `Stay22.advanced.scheduleNotification({force})` | `Future<void>` |
-| `Stay22.testing.setForce` / `setShowLogs` / `setBaseUrl` | `Future<void>` |
+| `Stay22.testing.setShowLogs` / `setBaseUrl` | `Future<void>` |
 | `Stay22.diagnostics.run()` / `logReport()` | `Future<Stay22Diagnostics>` |
 
-Failures arrive as a `PlatformException` whose `code` is one of
-`Stay22ErrorCode.notInitialized`, `.invalidArgument`, `.missingArgument`,
-`.unsupportedPlatform`, `.pluginUnavailable`, `.nativeFailure` — identical on both
-platforms. Bad arguments throw `ArgumentError` or `RangeError` from Dart before
-anything reaches the platform.
+Notification rejections and conflicts are returned in `NotificationResult`; inspect its
+`outcome` and `reason`. Platform channel failures can throw `PlatformException`, and some
+Dart input validation can throw `ArgumentError` or `RangeError` before a call reaches the
+platform.
 
 ## Support
 
-support@stay22.com
+See https://dev.stay22.com/docs/mobile-sdk, or email support@stay22.com.

@@ -13,7 +13,12 @@ import com.stay22.sdk.Stay22
 import com.stay22.sdk.Stay22Diagnostics
 import com.stay22.sdk.Stay22Event
 import com.stay22.sdk.Stay22EventListener
-import com.stay22.sdk.TravelContext
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -31,6 +36,8 @@ import io.flutter.plugin.common.MethodChannel.Result
  * report a real answer.
  */
 class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
+
+    private var queryScope: CoroutineScope? = null
 
     private lateinit var methodChannel: MethodChannel
     private lateinit var eventChannel: EventChannel
@@ -82,6 +89,7 @@ class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
     // --- FlutterPlugin ---
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        queryScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
         context = binding.applicationContext
 
         methodChannel = MethodChannel(binding.binaryMessenger, CHANNEL_METHOD)
@@ -99,6 +107,8 @@ class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        queryScope?.cancel()
+        queryScope = null
         methodChannel.setMethodCallHandler(null)
         eventChannel.setStreamHandler(null)
         eventSink = null
@@ -216,11 +226,6 @@ class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
                 Stay22.readEnabled(application)
             }
 
-            "setMedium" -> handle(result) {
-                Stay22.medium = call.requireString("medium")
-                null
-            }
-
             "setCampaignId" -> handle(result) {
                 Stay22.campaignId = call.optionalString("campaignId")
                 null
@@ -250,20 +255,27 @@ class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
                 }
             }
 
-            "setTravelContext" -> handle(result) {
-                Stay22.setTravelContext(
-                    TravelContext(
-                        address = call.optionalString("address"),
-                        latitude = call.optionalDouble("latitude"),
-                        longitude = call.optionalDouble("longitude"),
-                        checkinDate = call.optionalString("checkinDate"),
-                        checkoutDate = call.optionalString("checkoutDate"),
-                        hotelName = call.optionalString("hotelName"),
-                        adults = call.optionalInt("adults"),
-                        children = call.optionalInt("children"),
-                    ),
-                )
-                null
+            "ensureNotification", "updateNotification", "replaceNotification", "cancelNotification",
+            "scheduleDiagnosticNotification" -> handle(result) {
+                NotificationBridgeCodec.command(call.method, call.arguments)
+            }
+
+            "getNotificationState" -> {
+                val scope = queryScope
+                if (scope == null) {
+                    result.error("plugin_unavailable", "No Flutter engine is attached.", null)
+                    return
+                }
+                // The engine owns only this read. Detaching never cancels SDK work.
+                scope.launch {
+                    try {
+                        result.success(NotificationBridgeCodec.map(Stay22.notifications.current()))
+                    } catch (cancelled: CancellationException) {
+                        throw cancelled
+                    } catch (failure: Exception) {
+                        result.error("native_failure", failure.message, null)
+                    }
+                }
             }
 
             "clearTravelContext" -> handle(result) {
@@ -278,16 +290,6 @@ class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
 
             // Android has no shared notification delegate, so nothing can take it away.
             "ownsNotificationDelegate" -> handle(result) { true }
-
-            "scheduleNotification" -> handle(result) {
-                Stay22.advanced.scheduleNotification(call.optionalBoolean("force") ?: false)
-                null
-            }
-
-            "setForce" -> handle(result) {
-                Stay22.testing.force = call.requireBoolean("enabled")
-                null
-            }
 
             "setShowLogs" -> handle(result) {
                 Stay22.testing.showLogs = call.requireBoolean("enabled")
@@ -371,6 +373,8 @@ class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
     }
 
     private fun Stay22Event.toMap(): Map<String, Any?> = when (this) {
+        is Stay22Event.NotificationChanged ->
+            mapOf("type" to "notificationChanged", "receipt" to NotificationBridgeCodec.map(receipt))
         is Stay22Event.LocationUpdated ->
             mapOf("type" to "locationUpdated", "destination" to destination)
         is Stay22Event.NotificationScheduled ->
@@ -481,34 +485,12 @@ class Stay22FlutterPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
         /** Deep enough for a cold-start replay, shallow enough to never be a leak. */
         const val MAX_BUFFERED_EVENTS = 32
 
-        /**
-         * Calls that no-op on the native SDK before `initialize()` instead of doing
-         * anything observable — the exact set matters, so record why each side sits
-         * where it does rather than gating everything that touches `Stay22`.
-         *
-         * Exempt on purpose, and matched by an identical exemption on iOS
-         * (`cross-platform-parity`): `initialize`/`isInitialized` (that is what they
-         * answer), `setEnabled`/`isEnabled`/`setMedium`/`setCampaignId`/
-         * `setNotificationConfig` (the SDK docs promise these work before or after
-         * `initialize`, e.g. to gate behind a consent screen), `ownsNotificationDelegate`
-         * (Android has no shared delegate to own), `runDiagnostics`/
-         * `logDiagnosticsReport` (diagnostics is documented safe at any time, and a
-         * real test asserts running it before `initialize` is how you learn `initialize`
-         * was never called), and `setForce`/`setShowLogs`/`setBaseURL` (testing
-         * switches with no native guard on either platform).
-         *
-         * Everything else here silently discarded the call and reported success:
-         * `setTravelContext`/`clearTravelContext`/`scheduleNotification` returned null,
-         * and `hasNotificationPermission` returned false indistinguishable from "denied".
-         * `requestNotificationPermission` raises the same `not_initialized` error, so
-         * every call in the set now fails the one way.
-         */
+        // Notification commands return SDK results, including not_initialized.
+        // Only legacy void calls and permission reads need the old exception guard.
         val REQUIRES_INITIALIZATION = setOf(
             "hasNotificationPermission",
             "requestNotificationPermission",
-            "setTravelContext",
             "clearTravelContext",
-            "scheduleNotification",
         )
     }
 }

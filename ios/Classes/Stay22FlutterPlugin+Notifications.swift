@@ -20,7 +20,7 @@ public extension Stay22FlutterPlugin {
     /// delegate it has *already* handled the notification before calling your
     /// method, and handling it again opens the booking page twice and records
     /// two clicks.
-    static var ownsNotificationDelegate: Bool {
+    @MainActor static var ownsNotificationDelegate: Bool {
         Stay22.ownsNotificationDelegate
     }
 

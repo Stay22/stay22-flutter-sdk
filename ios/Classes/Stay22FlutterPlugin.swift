@@ -18,15 +18,13 @@ public class Stay22FlutterPlugin: NSObject, FlutterPlugin, Stay22EventListener {
     /// anything observable — the exact set matters, so see the Android bridge's
     /// companion-object comment (`cross-platform-parity`) for why each call sits
     /// where it does. `initialize`/`isInitialized`, the pre-init-safe setters
-    /// (`setEnabled`/`isEnabled`/`setMedium`/`setCampaignId`/`setNotificationConfig`),
+    /// (`setEnabled`/`isEnabled`/`setCampaignId`/`setNotificationConfig`),
     /// `ownsNotificationDelegate`, diagnostics, and the testing switches are exempt
     /// on both platforms; everything in this set used to silently discard the call.
     private static let requiresInitialization: Set<String> = [
         "hasNotificationPermission",
         "requestNotificationPermission",
-        "setTravelContext",
         "clearTravelContext",
-        "scheduleNotification",
     ]
 
     /// The SDK holds its event listener weakly, so without this the plugin is
@@ -42,6 +40,12 @@ public class Stay22FlutterPlugin: NSObject, FlutterPlugin, Stay22EventListener {
     // MARK: - Registration
 
     public static func register(with registrar: FlutterPluginRegistrar) {
+        // Flutter registers on the platform thread. Keep launch-time initialization
+        // synchronous so a cold notification response cannot overtake it.
+        MainActor.assumeIsolated { registerOnMain(with: registrar) }
+    }
+
+    @MainActor private static func registerOnMain(with registrar: FlutterPluginRegistrar) {
         let instance = Stay22FlutterPlugin()
         retained = instance
 
@@ -68,7 +72,7 @@ public class Stay22FlutterPlugin: NSObject, FlutterPlugin, Stay22EventListener {
     /// still claim `UNUserNotificationCenter.delegate` before iOS delivers a
     /// launch-time notification tap. Initializing from Dart is too late for that, so an
     /// app that wants cold-start taps to open their booking page declares the ID here.
-    private func initializeFromPlist() {
+    @MainActor private func initializeFromPlist() {
         guard !Stay22.isInitialized else { return }
         guard
             let aid = (Bundle.main.object(forInfoDictionaryKey: Self.plistAidKey) as? String)?
@@ -82,6 +86,11 @@ public class Stay22FlutterPlugin: NSObject, FlutterPlugin, Stay22EventListener {
     // MARK: - Method calls
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        // This channel uses Flutter's default platform task queue, never a background queue.
+        MainActor.assumeIsolated { handleOnMain(call, result: result) }
+    }
+
+    @MainActor private func handleOnMain(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         let args = call.arguments as? [String: Any]
 
         if Self.requiresInitialization.contains(call.method), !Stay22.isInitialized {
@@ -125,12 +134,6 @@ public class Stay22FlutterPlugin: NSObject, FlutterPlugin, Stay22EventListener {
         case "isEnabled":
             result(Stay22.isEnabled)
 
-        case "setMedium":
-            respond(result) {
-                Stay22.medium = try self.requireString(args, "medium")
-                return nil
-            }
-
         case "setCampaignId":
             respond(result) {
                 Stay22.campaignId = self.optionalString(args, "campaignId")
@@ -149,21 +152,13 @@ public class Stay22FlutterPlugin: NSObject, FlutterPlugin, Stay22EventListener {
                 await MainActor.run { result(granted) }
             }
 
-        case "setTravelContext":
-            respond(result) {
-                Stay22.setTravelContext(
-                    TravelContext(
-                        address: self.optionalString(args, "address"),
-                        latitude: (args?["latitude"] as? NSNumber)?.doubleValue,
-                        longitude: (args?["longitude"] as? NSNumber)?.doubleValue,
-                        checkinDate: self.optionalString(args, "checkinDate"),
-                        checkoutDate: self.optionalString(args, "checkoutDate"),
-                        hotelName: self.optionalString(args, "hotelName"),
-                        adults: (args?["adults"] as? NSNumber)?.intValue,
-                        children: (args?["children"] as? NSNumber)?.intValue
-                    )
-                )
-                return nil
+        case "ensureNotification", "updateNotification", "replaceNotification", "cancelNotification",
+             "scheduleDiagnosticNotification":
+            respond(result) { try NotificationBridgeCodec.command(call.method, args) }
+
+        case "getNotificationState":
+            Task { @MainActor in
+                result(NotificationBridgeCodec.map(await Stay22.notifications.current()))
             }
 
         case "clearTravelContext":
@@ -180,18 +175,6 @@ public class Stay22FlutterPlugin: NSObject, FlutterPlugin, Stay22EventListener {
 
         case "ownsNotificationDelegate":
             result(Stay22.ownsNotificationDelegate)
-
-        case "scheduleNotification":
-            respond(result) {
-                Stay22.advanced.scheduleNotification(force: (args?["force"] as? Bool) ?? false)
-                return nil
-            }
-
-        case "setForce":
-            respond(result) {
-                Stay22.testing.force = try self.requireBool(args, "enabled")
-                return nil
-            }
 
         case "setShowLogs":
             respond(result) {
@@ -222,9 +205,11 @@ public class Stay22FlutterPlugin: NSObject, FlutterPlugin, Stay22EventListener {
         }
     }
 
-    private func respond(_ result: @escaping FlutterResult, _ block: () throws -> Any?) {
+    @MainActor private func respond(_ result: @escaping FlutterResult, _ block: () throws -> Any?) {
         do {
             result(try block())
+        } catch let error as NotificationBridgeCodec.InvalidInput {
+            result(FlutterError(code: "invalid_argument", message: error.localizedDescription, details: nil))
         } catch let error as PluginError {
             result(FlutterError(code: error.code, message: error.message, details: nil))
         } catch {
@@ -389,6 +374,8 @@ public class Stay22FlutterPlugin: NSObject, FlutterPlugin, Stay22EventListener {
     public func onEvent(_ event: Stay22Event) {
         var body: [String: Any] = [:]
         switch event {
+        case .notificationChanged(let receipt):
+            body = ["type": "notificationChanged", "receipt": NotificationBridgeCodec.map(receipt)]
         case .locationUpdated(let destination):
             body = ["type": "locationUpdated", "destination": destination]
         case .notificationScheduled(let destination, let delay):

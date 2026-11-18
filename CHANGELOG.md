@@ -5,6 +5,39 @@ This project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [3.1.1] - 2026-11-17
+
+### Breaking changes
+- Replace setTravelContext and manual scheduling with a complete trip and timing request through `ensureNotification`; supply finite validity and inspect the returned result.
+- Replace testing.setForce or forced scheduling with `scheduleDiagnosticNotification` and an explicit trip for one isolated test. It returns `conflict` while a normal notification is still in progress.
+- Listen for the new `NotificationChanged` event to follow a notification. The SDK no longer emits `LocationUpdated`, `NotificationScheduled`, `NotificationShown`, `NotificationSkipped`, `NotificationBlocked` or `NotificationCancelled` for new notifications, and an exhaustive `switch` on `Stay22Event` needs a case for `NotificationChanged`.
+- `NotificationClicked.url` is the Stay22 link saved with the notification, even when the tap opens a booking app.
+- Remove `setMedium` calls; use `setCampaignId` for a campaign label.
+- Submit pending trips again after upgrading: the SDK retires notifications queued by an older version the next time it runs. On iOS, an older notification can still appear before then.
+- `NotificationConfig.title` and `message` are unset by default. Unset fields use your account's text, then the built-in text; set both to keep fixed text in your app.
+
+### Added
+- Control a notification with revision-checked update, replacement and cancellation; persist its reference to retry a command after restart.
+- Restrict timing with named-zone periods and a required guarantee, and inspect correlated receipts and separate OS observations.
+- The load, shown-notification, failure and opt-out reports the SDK sends to Stay22 include your app's version and build number.
+- Once the partner configuration has loaded, `Stay22.diagnostics.run()` fails its `aid` check when Stay22 has no partner for the `aid` your app passed to `initialize`. Notifications still run, but Stay22 credits no bookings to that `aid`.
+
+### Changed
+- Both platforms now use the published native SDK 3.1.1.
+- Once Stay22 turns on prepared booking links, a notification tap opens a booking link prepared during scheduling instead of waiting for a lookup.
+
+### Deprecated
+- `clearTravelContext` and `advanced.clearTravelContext` are deprecated; use `cancelNotification` with a saved reference.
+
+### Removed
+- The SDK no longer skips a trip because its destination matches the city Stay22 estimates from the user's network address, and no longer reports the `home_destination` skip reason.
+
+### Fixed
+- A notification's booking link now keeps the number of adults in the trip. Before, it could open the booking page with a different number of adults.
+- An `aid` with capital letters no longer makes the SDK reject its partner configuration and schedule no notifications.
+- When the SDK fails to report a tap on a prepared booking link to Stay22, it now retries instead of losing the report. On Android it also retries a failed report that a notification was shown.
+- On iOS, an app whose URL scheme your app does not list in `LSApplicationQueriesSchemes` is no longer treated as not installed.
+
 ## [1.6.0] - 2026-10-01
 ### Added
 - Support can inspect recent notification decisions, iOS scheduling, and Android posting history in device logs when testing your app, without adding logging code to your integration.
